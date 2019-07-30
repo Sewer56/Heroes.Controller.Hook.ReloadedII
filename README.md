@@ -43,7 +43,9 @@ Heroes.Controller.Hook.Interfaces: *Provides support for other mods to set input
 
 ## How to Use
 **A.** Install Reloaded Mods as usual. (Extract to mod directory)
+
 **B.** Enable all mods and run the game. (This auto-generates the config files)
+
 **C.** Adjust controller configurations. (if necessary)
 
 Controller configurations can be found in each of the respective mod folders.
