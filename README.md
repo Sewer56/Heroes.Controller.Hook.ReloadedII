@@ -16,6 +16,10 @@
   - [New Features](#new-features)
   - [How to Use](#how-to-use)
 
+# Prerequisites
+The CRI FS Hook uses the [Hooks Shared Library](https://github.com/Sewer56/Reloaded.SharedLib.Hooks).
+Please download and extract that mod first.
+
 # About This Project
 
 This project is a set of mods for [Reloaded II](https://github.com/Reloaded-Project/Reloaded-II) Mod Loader that provide support for sending and post processing of inputs that get sent to the game.
