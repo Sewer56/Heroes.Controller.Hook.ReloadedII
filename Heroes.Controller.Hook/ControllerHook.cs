@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using Heroes.Controller.Hook.Heroes;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures;
-using Reloaded.Hooks;
-using Reloaded.Hooks.X86;
-using static Reloaded.Hooks.X86.FunctionAttribute;
+using Reloaded.Hooks.Definitions;
+using Reloaded.Hooks.Definitions.X86;
+using static Reloaded.Hooks.Definitions.X86.FunctionAttribute;
 
 namespace Heroes.Controller.Hook
 {
@@ -33,8 +32,8 @@ namespace Heroes.Controller.Hook
                 _controllers[x] = new ReloadedController(x);
 
             // Hook get controls function.
-            _psPadServerHook            = new Hook<psPADServerPC>(PSPADServerImpl, 0x444F30).Activate();
-            _periMakeRepeatCountHook    = new Hook<sGamePeri__MakeRepeatCount>(MakeRepeatCountImpl, 0x00434FF0, 20).Activate();
+            _psPadServerHook            = Program.ReloadedHooks.CreateHook<psPADServerPC>(PSPADServerImpl, 0x444F30).Activate();
+            _periMakeRepeatCountHook    = Program.ReloadedHooks.CreateHook<sGamePeri__MakeRepeatCount>(MakeRepeatCountImpl, 0x00434FF0, 20).Activate();
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Heroes.Controller.Hook
 
         /* Hook function definitions. */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        [Function(Reloaded.Hooks.X86.CallingConventions.Cdecl)]
+        [Function(CallingConventions.Cdecl)]
         public delegate int psPADServerPC(); // 00444F30
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

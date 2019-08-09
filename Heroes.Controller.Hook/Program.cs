@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO.Pipes;
 using Heroes.Controller.Hook.Interfaces;
+using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
@@ -8,6 +10,7 @@ namespace Heroes.Controller.Hook
 {
     public class Program : IMod, IExports
     {
+        public static IReloadedHooks ReloadedHooks; // Reloaded.Shared.Hooks is not unloadable. Therefore not using WeakReference is justified.
         private IModLoader _modLoader;
         private ControllerHook _hook;
 
@@ -17,6 +20,7 @@ namespace Heroes.Controller.Hook
             Debugger.Launch();
             #endif
             _modLoader = (IModLoader)loader;
+            _modLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
 
             /* Your mod code starts here. */
             _hook = new ControllerHook();

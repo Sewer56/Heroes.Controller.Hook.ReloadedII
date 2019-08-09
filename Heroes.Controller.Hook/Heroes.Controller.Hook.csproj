@@ -33,8 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Hooks" Version="1.2.0" />
     <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.2.0" />
+    <PackageReference Include="Reloaded.SharedLib.Hooks" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
