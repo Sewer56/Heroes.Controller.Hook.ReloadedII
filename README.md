@@ -5,6 +5,7 @@
 	<strong>Same Game, New Controllers</strong>
     <p>When the stock mouse support annoys you so much<br/>
     when hacking that you make an entire input mod to avoid it.</p>
+<b>Id: sonicheroes.controller.hook</b>
 </div>
 
 # Table of Contents
