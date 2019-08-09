@@ -2,7 +2,7 @@
   "ModId": "sonicheroes.controller.hook.postprocess",
   "ModName": "SH Essentials: Post Processing for Controller Hook",
   "ModAuthor": "Sewer56",
-  "ModVersion": "1.0.0",
+  "ModVersion": "1.0.1",
   "ModDescription": "Provides common input post processing effects such as analog stick deadzones, swapping triggers etc.",
   "ModDll": "Heroes.Controller.Hook.PostProcess.dll",
   "ModIcon": "Preview.png",
