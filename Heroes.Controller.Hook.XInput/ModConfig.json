@@ -2,7 +2,7 @@
   "ModId": "sonicheroes.controller.hook.xinput",
   "ModName": "SH Essentials: XInput for Controller Hook",
   "ModAuthor": "Sewer56",
-  "ModVersion": "1.0.2",
+  "ModVersion": "1.0.3",
   "ModDescription": "Feeds inputs to the Sonic Heroes Essentials",
   "ModDll": "Heroes.Controller.Hook.XInput.dll",
   "ModIcon": "Preview.png",

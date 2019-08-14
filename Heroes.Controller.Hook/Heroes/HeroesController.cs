@@ -1,4 +1,5 @@
 ﻿using Heroes.Controller.Hook.Interfaces.Enums;
+using Heroes.Controller.Hook.Interfaces.Internal;
 using Heroes.Controller.Hook.Interfaces.Structures;
 
 namespace Heroes.Controller.Hook.Heroes
@@ -6,36 +7,36 @@ namespace Heroes.Controller.Hook.Heroes
     /// <summary>
     /// Describes a Sonic Heroes controller structure.
     /// </summary>
-    public struct HeroesController
+    public struct HeroesController : IHeroesController
     {
         /// <summary>
         /// Contains the currently pressed buttons at any point.
         /// </summary>
-        public ButtonFlags ButtonFlags;
+        public ButtonFlags ButtonFlags { get; set; }
 
         /// <summary>
         /// This value is (-1 - _buttonFlags).
         /// This value is also 0 when the window is not in focus.
         /// </summary>
-        public int MinusOneMinusButtonFlags;
+        public int MinusOneMinusButtonFlags { get; set; }
 
         /// <summary>
         /// If a button is pressed and it was not pressed the last frame,
         /// set the <see cref="ButtonFlags"/> of said button.
         /// </summary>
-        public ButtonFlags OneFramePressButtonFlag;
+        public ButtonFlags OneFramePressButtonFlag { get; set; }
 
         /// <summary>
         /// If a button is released and it was pressed the last frame,
         /// set the <see cref="ButtonFlags"/> of said button.
         /// </summary>
-        public ButtonFlags OneFrameReleaseButtonFlag;
+        public ButtonFlags OneFrameReleaseButtonFlag { get; set; }
 
         /* Range: -1.0 to 1.0 */
-        public float LeftStickX;
-        public float LeftStickY;
-        public float RightStickX;
-        public float RightStickY;
+        public float LeftStickX { get; set; }
+        public float LeftStickY { get; set; }
+        public float RightStickX { get; set; }
+        public float RightStickY { get; set; }
 
         /// <summary>
         /// This value never seems to change. It does not have any effect on the game.

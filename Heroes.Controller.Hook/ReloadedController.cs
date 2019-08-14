@@ -2,6 +2,7 @@
 using Heroes.Controller.Hook.Heroes;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Enums;
+using Heroes.Controller.Hook.Interfaces.Internal;
 using Heroes.Controller.Hook.Interfaces.Structures;
 
 namespace Heroes.Controller.Hook
@@ -45,17 +46,19 @@ namespace Heroes.Controller.Hook
         {
             var inputs = new Inputs();
 
-            // Get from and broadcast final inputs to subscribers.
+            // Get inputs from subscribers.
             hook.InvokeSetInputs(ref inputs, _port);
             hook.InvokePostProcessInputs(ref inputs, _port);
-            hook.InvokeOnInput(inputs, _port);
 
             // Convert to game structure and write to memory.
             HeroesController.FromInputs(ref inputs, out var newInputs);
             newInputs.Finalize(_lastFrameInputs.ButtonFlags);
-
             *_heroesControllerPtr = newInputs;
             _lastFrameInputs = inputs;
+
+            // Broadcast final inputs to subscribers.
+            IHeroesController newInputsInterface = newInputs;
+            hook.InvokeOnInput(new ExtendedHeroesController(ref newInputsInterface, inputs.LeftTriggerPressure, inputs.RightTriggerPressure), _port);
         }
 
         /// <summary>

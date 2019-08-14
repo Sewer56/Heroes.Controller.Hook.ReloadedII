@@ -89,7 +89,7 @@ namespace Heroes.Controller.Hook
 
         public void InvokeSetInputs(ref Inputs inputs, int port)         => SetInputs?.Invoke(ref inputs, port);
         public void InvokePostProcessInputs(ref Inputs inputs, int port) => PostProcessInputs?.Invoke(ref inputs, port);
-        public void InvokeOnInput(Inputs inputs, int port)               => OnInput?.Invoke(inputs, port);
+        public void InvokeOnInput(ExtendedHeroesController inputs, int port) => OnInput?.Invoke(inputs, port);
 
         /* Hook function definitions. */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
