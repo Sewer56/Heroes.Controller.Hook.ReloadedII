@@ -11,45 +11,45 @@ namespace Heroes.Controller.Hook.Interfaces.Structures
         /// <summary>
         /// Contains the currently pressed buttons at any point.
         /// </summary>
-        ButtonFlags ButtonFlags { get; set; }
+        public ButtonFlags ButtonFlags { get; set; }
 
         /// <summary>
         /// This value is (-1 - _buttonFlags).
         /// This value is also 0 when the window is not in focus.
         /// </summary>
-        int MinusOneMinusButtonFlags { get; set; }
+        public int MinusOneMinusButtonFlags { get; set; }
 
         /// <summary>
         /// If a button is pressed and it was not pressed the last frame,
         /// set the <see cref="ButtonFlags"/> of said button.
         /// </summary>
-        ButtonFlags OneFramePressButtonFlag { get; set; }
+        public ButtonFlags OneFramePressButtonFlag { get; set; }
 
         /// <summary>
         /// If a button is released and it was pressed the last frame,
         /// set the <see cref="ButtonFlags"/> of said button.
         /// </summary>
-        ButtonFlags OneFrameReleaseButtonFlag { get; set; }
+        public ButtonFlags OneFrameReleaseButtonFlag { get; set; }
 
         /// <summary>
         /// Range -1.0 to 1.0.
         /// </summary>
-        float LeftStickX { get; set; }
+        public float LeftStickX { get; set; }
 
         /// <summary>
         /// Range -1.0 to 1.0.
         /// </summary>
-        float LeftStickY { get; set; }
+        public float LeftStickY { get; set; }
 
         /// <summary>
         /// Range -1.0 to 1.0.
         /// </summary>
-        float RightStickX { get; set; }
+        public float RightStickX { get; set; }
 
         /// <summary>
         /// Range -1.0 to 1.0.
         /// </summary>
-        float RightStickY { get; set; }
+        public float RightStickY { get; set; }
 
         /// <summary>
         /// Range 0 to 255.
