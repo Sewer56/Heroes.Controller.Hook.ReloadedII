@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Heroes.Controller.Hook.Interfaces\Heroes.Controller.Hook.Interfaces.csproj" />
+    <ProjectReference Include="..\Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

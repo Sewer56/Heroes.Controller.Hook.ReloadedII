@@ -59,8 +59,8 @@ namespace Heroes.Controller.Hook.XInput
         public void Resume()    => SetupController();
         public void Unload()    => TearDownController();
 
-        public bool CanUnload()  => false;
-        public bool CanSuspend() => false;
+        public bool CanUnload()  => true;
+        public bool CanSuspend() => true;
         public Action Disposing { get; }
     }
 }

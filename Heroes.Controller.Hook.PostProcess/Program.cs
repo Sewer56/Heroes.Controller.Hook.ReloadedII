@@ -58,8 +58,8 @@ namespace Heroes.Controller.Hook.PostProcess
         public void Resume()  => SetupController();
         public void Unload()  => TearDownController();
 
-        public bool CanUnload()     => false;
-        public bool CanSuspend()    => false;
+        public bool CanUnload()     => true;
+        public bool CanSuspend()    => true;
 
         /* Automatically called by the mod loader when the mod is about to be unloaded. */
         public Action Disposing { get; }

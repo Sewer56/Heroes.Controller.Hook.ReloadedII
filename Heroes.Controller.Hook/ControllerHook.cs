@@ -23,13 +23,13 @@ namespace Heroes.Controller.Hook
         private IHook<psPADServerPC> _psPadServerHook;
         private IHook<sGamePeri__MakeRepeatCount> _periMakeRepeatCountHook;
         private ReloadedController[] _controllers = new ReloadedController[4];
-        
+
         /* Entry Point */
-        public ControllerHook()
+        public ControllerHook(string modDirectory)
         {
             // Setup controllers.
             for (int x = 0; x < _controllers.Length; x++)
-                _controllers[x] = new ReloadedController(x);
+                _controllers[x] = new ReloadedController(x, modDirectory);
 
             // Hook get controls function.
             _psPadServerHook            = Program.ReloadedHooks.CreateHook<psPADServerPC>(PSPADServerImpl, 0x444F30).Activate();
@@ -60,6 +60,8 @@ namespace Heroes.Controller.Hook
         /// <returns>Game does not use return value.</returns>
         private int PSPADServerImpl()
         {
+            _psPadServerHook.OriginalFunction();
+
             if (Utility.IsWindowActivated())
             {
                 for (int x = 0; x < _controllers.Length; x++)

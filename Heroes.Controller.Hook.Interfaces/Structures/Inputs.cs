@@ -1,4 +1,5 @@
 ﻿using Heroes.Controller.Hook.Interfaces.Enums;
+using Heroes.Controller.Hook.Interfaces.Internal;
 
 namespace Heroes.Controller.Hook.Interfaces.Structures
 {
@@ -41,5 +42,24 @@ namespace Heroes.Controller.Hook.Interfaces.Structures
         /// Range 0 to 255.
         /// </summary>
         public byte RightTriggerPressure;
+
+        /// <summary>
+        /// Instantiates this structure given original Heroes Controller Inputs.
+        /// </summary>
+        public static Inputs FromHeroesController(IHeroesController controller)
+        {
+            var inputs = new Inputs
+            {
+                ButtonFlags = controller.ButtonFlags,
+                LeftStickX = controller.LeftStickX,
+                LeftStickY = controller.LeftStickY,
+                RightStickX = controller.RightStickX,
+                RightStickY = controller.RightStickY,
+                LeftTriggerPressure = 0,
+                RightTriggerPressure = 0
+            };
+
+            return inputs;
+        }
     }
 }

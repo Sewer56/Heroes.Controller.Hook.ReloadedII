@@ -11,6 +11,8 @@ namespace Heroes.Controller.Hook
     public class Program : IMod, IExports
     {
         public static IReloadedHooks ReloadedHooks; // Reloaded.Shared.Hooks is not unloadable. Therefore not using WeakReference is justified.
+        public const string ThisModId = "sonicheroes.controller.hook";
+
         private IModLoader _modLoader;
         private ControllerHook _hook;
 
@@ -23,7 +25,7 @@ namespace Heroes.Controller.Hook
             _modLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
 
             /* Your mod code starts here. */
-            _hook = new ControllerHook();
+            _hook = new ControllerHook(_modLoader.GetDirectoryForModId(ThisModId));
             _modLoader.AddOrReplaceController<IControllerHook>(this, _hook);
         }
 
@@ -32,8 +34,8 @@ namespace Heroes.Controller.Hook
         public void Resume()    => _hook.Resume();
         public void Unload()    => Suspend();
 
-        public bool CanUnload()  => false;
-        public bool CanSuspend() => false;
+        public bool CanUnload()  => true;
+        public bool CanSuspend() => true;
         public Action Disposing { get; }
         public Type[] GetTypes() => new [] { typeof(IControllerHook) };
     }

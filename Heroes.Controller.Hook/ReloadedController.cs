@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using Heroes.Controller.Hook.Heroes;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Enums;
@@ -16,6 +17,7 @@ namespace Heroes.Controller.Hook
         private HeroesController* _heroesControllerPtr;
         private Inputs _lastFrameInputs;
         private int _port;
+        private Config _config;
 
         /*
             ------------
@@ -27,10 +29,12 @@ namespace Heroes.Controller.Hook
         /// Creates a new <see cref="ReloadedController"/> that writes controls to Heroes' controller input struct.
         /// </summary>
         /// <param name="port">The controller port. Range 0-3.</param>
-        public ReloadedController(int port)
+        /// <param name="modDirectory"></param>
+        public ReloadedController(int port, string modDirectory)
         {
             _port = port;
             _heroesControllerPtr = HeroesControllerFactory.GetController(_port);
+            _config = Config.FromPath(modDirectory, port);
         }
 
         /*
@@ -44,7 +48,9 @@ namespace Heroes.Controller.Hook
         /// </summary>
         public void SendInputs(ControllerHook hook)
         {
-            var inputs = new Inputs();
+            var inputs = _config.UseOriginalInputs
+                ? Inputs.FromHeroesController(*_heroesControllerPtr)
+                : new Inputs();
 
             // Get inputs from subscribers.
             hook.InvokeSetInputs(ref inputs, _port);
