@@ -10,7 +10,7 @@ namespace Heroes.Controller.Hook
         /// <summary>
         /// Uses original inputs acquired from the game.
         /// </summary>
-        public bool UseOriginalInputs { get; set; } = true;
+        public bool UseOriginalInputs { get; set; } = false;
 
         public static string GetFilePath(string modFolder, int port) => $"{modFolder}\\Controller-{port}.json";
         public static Config FromPath(string modFolder, int port) => JsonSerializable<Config>.FromPath(GetFilePath(modFolder, port));
