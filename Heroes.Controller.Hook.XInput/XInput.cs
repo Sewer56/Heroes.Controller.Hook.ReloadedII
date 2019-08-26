@@ -9,23 +9,22 @@ namespace Heroes.Controller.Hook.XInput
 {
     public class XInput
     {
-        private SharpDX.XInput.Controller[] _controllers =
-        {
-            new SharpDX.XInput.Controller(UserIndex.One),
-            new SharpDX.XInput.Controller(UserIndex.Two),
-            new SharpDX.XInput.Controller(UserIndex.Three),
-            new SharpDX.XInput.Controller(UserIndex.Four)
-        };
-
-        private Config[] _configurations;
-        private ConfigReadWriter _configReadWriter;
+        private const int XInputControllerLimit = 4;
+        private Dictionary<int, ControllerConfigTuple> _controllers = new Dictionary<int, ControllerConfigTuple>();
 
         public XInput(string modFolder)
         {
-            _configReadWriter   = new ConfigReadWriter(modFolder);
-            _configurations     = new Config[_controllers.Length];
-            for (int x = 0; x < _configurations.Length; x++)
-                _configurations[x] = _configReadWriter.FromJson(x);
+            var configReadWriter = new ConfigReadWriter(modFolder);
+
+            for (int controllerNo = 0; controllerNo < XInputControllerLimit; controllerNo++)
+            {
+                var config = configReadWriter.FromJson(controllerNo);
+                if (config.ControllerPort == -1)
+                    config.ControllerPort = controllerNo;
+
+                configReadWriter.ToJson(config, controllerNo);
+                _controllers[config.ControllerPort] = new ControllerConfigTuple(new SharpDX.XInput.Controller((UserIndex) controllerNo), config);
+            }
         }
 
         /// <summary>
@@ -33,11 +32,16 @@ namespace Heroes.Controller.Hook.XInput
         /// </summary>
         public void SendInputs(ref Inputs inputs, int port)
         {
-            var controller = _controllers[port];
-            if (controller.IsConnected)
+            if (_controllers.TryGetValue(port, out var controllerTuple))
             {
+                var controller = controllerTuple.Controller;
+                var config     = controllerTuple.Config;
+
+                if (!controller.IsConnected)
+                    return;
+
                 controller.GetState(out State state);
-                Converter.ToHeroesController(ref state, ref inputs, _configurations[port]);
+                Converter.ToHeroesController(ref state, ref inputs, config);
             }
         }
     }

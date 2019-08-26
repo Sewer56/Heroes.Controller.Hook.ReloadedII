@@ -7,6 +7,7 @@ namespace Heroes.Controller.Hook.XInput
 {
     public class Config
     {
+        public int                ControllerPort { get; set; } = -1; 
         public GamepadButtonFlags Jump          { get; set; } = GamepadButtonFlags.A;
         public GamepadButtonFlags FormationR    { get; set; } = GamepadButtonFlags.B;
         public GamepadButtonFlags Action        { get; set; } = GamepadButtonFlags.X;
