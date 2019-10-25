@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures;
-using Heroes.Controller.Hook.XInput.Help;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
@@ -26,7 +25,6 @@ namespace Heroes.Controller.Hook.XInput
 
             /* Your mod code starts here. */
             string modDirectory = _modLoader.GetDirectoryForModId(MyModId);
-            Buttons.SaveIfNotExist(modDirectory);
 
             _xInput = new XInput(modDirectory);
             _modLoader.ModLoaded += ModLoaded;

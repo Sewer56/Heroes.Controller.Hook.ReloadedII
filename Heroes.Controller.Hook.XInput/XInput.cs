@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Heroes.Controller.Hook.Interfaces.Structures;
-using Heroes.Controller.Hook.XInput.Json;
+using Heroes.Controller.Hook.XInput.Configuration;
 using SharpDX.XInput;
 
 namespace Heroes.Controller.Hook.XInput
@@ -14,15 +14,15 @@ namespace Heroes.Controller.Hook.XInput
 
         public XInput(string modFolder)
         {
-            var configReadWriter = new ConfigReadWriter(modFolder);
+            var configReadWriter = new Configurator(modFolder);
 
             for (int controllerNo = 0; controllerNo < XInputControllerLimit; controllerNo++)
             {
-                var config = configReadWriter.FromJson(controllerNo);
+                var config = configReadWriter.GetConfiguration<Config>(controllerNo);
                 if (config.ControllerPort == -1)
                     config.ControllerPort = controllerNo;
 
-                configReadWriter.ToJson(config, controllerNo);
+                config.Save();
                 _controllers[config.ControllerPort] = new ControllerConfigTuple(new SharpDX.XInput.Controller((UserIndex) controllerNo), config);
             }
         }

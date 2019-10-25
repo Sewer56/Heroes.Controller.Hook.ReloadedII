@@ -32,10 +32,24 @@ namespace Heroes.Controller.Hook.Heroes
         /// </summary>
         public ButtonFlags OneFrameReleaseButtonFlag { get; set; }
 
-        /* Range: -1.0 to 1.0 */
+        /// <summary>
+        /// Range -1.0 to 1.0.
+        /// </summary>
         public float LeftStickX { get; set; }
+
+        /// <summary>
+        /// Range -1.0 to 1.0.
+        /// </summary>
         public float LeftStickY { get; set; }
+
+        /// <summary>
+        /// Range -1.0 to 1.0.
+        /// </summary>
         public float RightStickX { get; set; }
+
+        /// <summary>
+        /// Range -1.0 to 1.0.
+        /// </summary>
         public float RightStickY { get; set; }
 
         /// <summary>

@@ -5,6 +5,7 @@ using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Enums;
 using Heroes.Controller.Hook.Interfaces.Internal;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.PostProcess.Configuration;
 
 namespace Heroes.Controller.Hook
 {
@@ -34,7 +35,7 @@ namespace Heroes.Controller.Hook
         {
             _port = port;
             _heroesControllerPtr = HeroesControllerFactory.GetController(_port);
-            _config = Config.FromPath(modDirectory, port);
+            _config = new Configurator(modDirectory).GetConfiguration<Config>(port);
         }
 
         /*

@@ -1,6 +1,6 @@
 ﻿using System;
 using Heroes.Controller.Hook.Interfaces.Structures;
-using Heroes.Controller.Hook.PostProcess.Json;
+using Heroes.Controller.Hook.PostProcess.Configuration;
 
 namespace Heroes.Controller.Hook.PostProcess
 {
@@ -9,14 +9,17 @@ namespace Heroes.Controller.Hook.PostProcess
         private const int ControllerCount = 4;
 
         private Config[] _configurations;
-        private ConfigReadWriter _configReadWriter;
+        private Configurator _configurator;
 
         public PostProcess(string modFolder)
         {
-            _configReadWriter   = new ConfigReadWriter(modFolder);
+            _configurator       = new Configurator(modFolder);
             _configurations     = new Config[ControllerCount];
             for (int x = 0; x < _configurations.Length; x++)
-                _configurations[x] = _configReadWriter.FromJson(x);
+            {
+                _configurations[x] = _configurator.GetConfiguration<Config>(x);
+                _configurations[x].Save();
+            }
         }
 
         /// <summary>

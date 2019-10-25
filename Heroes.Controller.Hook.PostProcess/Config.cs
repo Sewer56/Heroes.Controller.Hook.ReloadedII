@@ -1,8 +1,9 @@
 ﻿using Heroes.Controller.Hook.PostProcess.Structures;
+using Heroes.Controller.Hook.Shared.Configuration;
 
 namespace Heroes.Controller.Hook.PostProcess
 {
-    public class Config
+    public class Config : Configurable
     {
         public StickDeadzone LeftStickXDeadzone         { get; set; } = new StickDeadzone();
         public StickDeadzone LeftStickYDeadzone         { get; set; } = new StickDeadzone();
