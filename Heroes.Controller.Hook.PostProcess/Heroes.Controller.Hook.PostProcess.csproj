@@ -6,10 +6,6 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>C:\Users\Sewer56\Desktop\Reloaded II\Mods\HeroesControllerPostProcess\</OutputPath>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="ModConfig.json" />
     <None Remove="Preview.png" />
