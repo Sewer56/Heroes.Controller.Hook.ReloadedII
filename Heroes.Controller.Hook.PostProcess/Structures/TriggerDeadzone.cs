@@ -5,8 +5,8 @@ namespace Heroes.Controller.Hook.PostProcess.Structures
 {
     public class TriggerDeadzone
     {
-        public bool  IsEnabled          { get; set; } = true;
-        public float DeadzonePercent    { get; set; } = 10F;
+        public bool  IsEnabled          { get; set; }
+        public float DeadzonePercent    { get; set; }
 
         [JsonIgnore]
         public float MinimumPressure  => (DeadzonePercent / Percent.MaxValue) * byte.MaxValue;
@@ -23,5 +23,7 @@ namespace Heroes.Controller.Hook.PostProcess.Structures
 
             return triggerValue;
         }
+
+        public override string ToString() => $"Enabled: {IsEnabled}, DeadzonePercent: {DeadzonePercent}";
     }
 }

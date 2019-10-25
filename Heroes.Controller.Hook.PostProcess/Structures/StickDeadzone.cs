@@ -24,5 +24,7 @@ namespace Heroes.Controller.Hook.PostProcess.Structures
 
             return stickValue;
         }
+
+        public override string ToString() => $"Enabled: {IsEnabled}, DeadzonePercent: {DeadzonePercent}";
     }
 }

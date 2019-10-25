@@ -12,7 +12,7 @@ namespace Heroes.Controller.Hook
         /// <summary>
         /// Uses original inputs acquired from the game.
         /// </summary>
-        [DisplayName("If set to true, original inputs from the game are not overwritten. This may be desirable for those who still want mouse support.")]
+        [Description("If set to true, original inputs from the game are not overwritten. This may be desirable for those who still want mouse support.")]
         public bool UseOriginalInputs { get; set; } = false;
     }
 }
