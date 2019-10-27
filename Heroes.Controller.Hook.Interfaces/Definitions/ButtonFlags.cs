@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Heroes.Controller.Hook.Interfaces.Enums
+namespace Heroes.Controller.Hook.Interfaces.Definitions
 {
     [Flags]
     public enum ButtonFlags

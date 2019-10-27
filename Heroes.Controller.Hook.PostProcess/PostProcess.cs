@@ -1,5 +1,6 @@
 ﻿using System;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Heroes.Controller.Hook.PostProcess.Configuration;
 
 namespace Heroes.Controller.Hook.PostProcess
@@ -25,7 +26,7 @@ namespace Heroes.Controller.Hook.PostProcess
         /// <summary>
         /// Sends inputs to the Inter Mod Communication's <see cref="Inputs"/> structure.
         /// </summary>
-        public void PostProcessInputs(ref Inputs inputs, int port)
+        public void PostProcessInputs(ref IInputs inputs, int port)
         {
             var config = _configurations[port];
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using Heroes.Controller.Hook.Shared;
 using Heroes.Controller.Hook.Shared.Configuration;
 
 namespace Heroes.Controller.Hook

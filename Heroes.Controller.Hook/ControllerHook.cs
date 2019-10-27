@@ -1,27 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Heroes.Controller.Hook.Heroes;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
+using Heroes.SDK.API;
+using Heroes.SDK.Classes.NativeClasses;
+using Heroes.SDK.Classes.PseudoNativeClasses;
+using Heroes.SDK.Definitions.Structures.Input;
 using Reloaded.Hooks.Definitions;
-using Reloaded.Hooks.Definitions.X86;
-using static Reloaded.Hooks.Definitions.X86.FunctionAttribute;
 
 namespace Heroes.Controller.Hook
 {
     public unsafe class ControllerHook : IControllerHook
     {
-        /* Addresses of the SkyPad structures in game memory mapped to controller ports. */
-        private static Dictionary<int, int> _skypadAddresses = new Dictionary<int, int>()
-        {
-            { 0x00A23A68, 0 },
-            { 0x00A23AB4, 1 },
-            { 0x00A23B00, 2 },
-            { 0x00A23B4C, 3 }
-        };
-
-        private IHook<psPADServerPC> _psPadServerHook;
-        private IHook<sGamePeri__MakeRepeatCount> _periMakeRepeatCountHook;
+        private IHook<InputFunctions.psPADServerPC> _psPadServerHook;
+        private IHook<GamePeri.Native_MakeRepeatCount> _periMakeRepeatCountHook;
         private ReloadedController[] _controllers = new ReloadedController[4];
 
         /* Entry Point */
@@ -32,8 +24,8 @@ namespace Heroes.Controller.Hook
                 _controllers[x] = new ReloadedController(x, modDirectory);
 
             // Hook get controls function.
-            _psPadServerHook            = Program.ReloadedHooks.CreateHook<psPADServerPC>(PSPADServerImpl, 0x444F30).Activate();
-            _periMakeRepeatCountHook    = Program.ReloadedHooks.CreateHook<sGamePeri__MakeRepeatCount>(MakeRepeatCountImpl, 0x00434FF0, 20).Activate();
+            _psPadServerHook            = InputFunctions.Fun_psPADServerPC.Hook(PSPADServerImpl).Activate();
+            _periMakeRepeatCountHook    = GamePeri.Fun_MakeRepeatCount.Hook(MakeRepeatCountImpl, 20).Activate();
         }
 
         /// <summary>
@@ -62,11 +54,11 @@ namespace Heroes.Controller.Hook
         {
             _psPadServerHook.OriginalFunction();
 
-            if (Utility.IsWindowActivated())
-            {
-                for (int x = 0; x < _controllers.Length; x++)
-                    _controllers[x].SendInputs(this);
-            }
+            if (!Window.IsAnyWindowActivated()) 
+                return 1;
+
+            foreach (var controller in _controllers)
+                controller.SendInputs(this);
 
             return 1;
         }
@@ -78,7 +70,19 @@ namespace Heroes.Controller.Hook
         /// </summary>
         private SkyPad* MakeRepeatCountImpl(SkyPad* skyPad)
         {
-            if (_skypadAddresses.TryGetValue((int)skyPad, out int port))
+            int port = -1;
+
+            // Find port using address.
+            for (int x = 0; x < InputFunctions.FinalInputs.Count; x++)
+            {
+                if (&InputFunctions.FinalInputs.Pointer[x] != skyPad) 
+                    continue;
+
+                port = x;
+                break;
+            }
+
+            if (port != -1)
                 _controllers[port].SetTriggers(skyPad);
 
             return _periMakeRepeatCountHook.OriginalFunction(skyPad);
@@ -89,17 +93,8 @@ namespace Heroes.Controller.Hook
         public event InputEvent PostProcessInputs;
         public event OnInputEvent OnInput;
 
-        public void InvokeSetInputs(ref Inputs inputs, int port)         => SetInputs?.Invoke(ref inputs, port);
-        public void InvokePostProcessInputs(ref Inputs inputs, int port) => PostProcessInputs?.Invoke(ref inputs, port);
-        public void InvokeOnInput(ExtendedHeroesController inputs, int port) => OnInput?.Invoke(inputs, port);
-
-        /* Hook function definitions. */
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        [Function(CallingConventions.Cdecl)]
-        public delegate int psPADServerPC(); // 00444F30
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        [Function(new[] { Register.eax, }, Register.eax, StackCleanup.Caller)]
-        public delegate SkyPad* sGamePeri__MakeRepeatCount(SkyPad* skyPad); // 00434FF0
+        public void InvokeSetInputs(ref IInputs inputs, int port)         => SetInputs?.Invoke(ref inputs, port);
+        public void InvokePostProcessInputs(ref IInputs inputs, int port) => PostProcessInputs?.Invoke(ref inputs, port);
+        public void InvokeOnInput(IExtendedHeroesController inputs, int port) => OnInput?.Invoke(inputs, port);
     }
 }

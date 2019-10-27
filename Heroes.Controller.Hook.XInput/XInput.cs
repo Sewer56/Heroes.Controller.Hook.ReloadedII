@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Heroes.Controller.Hook.XInput.Configuration;
 using SharpDX.XInput;
 
@@ -30,7 +31,7 @@ namespace Heroes.Controller.Hook.XInput
         /// <summary>
         /// Sends inputs to the Inter Mod Communication's <see cref="Inputs"/> structure.
         /// </summary>
-        public void SendInputs(ref Inputs inputs, int port)
+        public void SendInputs(ref IInputs inputs, int port)
         {
             if (_controllers.TryGetValue(port, out var controllerTuple))
             {

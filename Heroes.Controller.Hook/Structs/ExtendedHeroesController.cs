@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Heroes.Controller.Hook.Interfaces.Enums;
-using Heroes.Controller.Hook.Interfaces.Internal;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
+using Heroes.SDK.Definitions.Structures.Input;
+using ButtonFlags = Heroes.Controller.Hook.Interfaces.Definitions.ButtonFlags;
 
 namespace Heroes.Controller.Hook.Interfaces.Structures
 {
-    public struct ExtendedHeroesController
+    public struct ExtendedHeroesController : IExtendedHeroesController
     {
         /// <summary>
         /// Contains the currently pressed buttons at any point.
@@ -61,12 +62,12 @@ namespace Heroes.Controller.Hook.Interfaces.Structures
         /// </summary>
         public byte RightTriggerPressure { get; set; }
 
-        public ExtendedHeroesController(ref IHeroesController controller, byte leftTriggerPressure = 0, byte rightTriggerPressure = 0)
+        public ExtendedHeroesController(ref HeroesController controller, byte leftTriggerPressure = 0, byte rightTriggerPressure = 0)
         {
-            ButtonFlags = controller.ButtonFlags;
+            ButtonFlags = (ButtonFlags) controller.ButtonFlags;
             MinusOneMinusButtonFlags = controller.MinusOneMinusButtonFlags;
-            OneFramePressButtonFlag = controller.OneFramePressButtonFlag;
-            OneFrameReleaseButtonFlag = controller.OneFrameReleaseButtonFlag;
+            OneFramePressButtonFlag = (ButtonFlags) controller.OneFramePressButtonFlag;
+            OneFrameReleaseButtonFlag = (ButtonFlags) controller.OneFrameReleaseButtonFlag;
             LeftStickX = controller.LeftStickX;
             LeftStickY = controller.LeftStickY;
             RightStickX = controller.RightStickX;

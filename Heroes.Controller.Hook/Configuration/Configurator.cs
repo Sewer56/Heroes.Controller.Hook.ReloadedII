@@ -22,14 +22,14 @@ namespace Heroes.Controller.Hook.PostProcess.Configuration
         /// <summary>
         /// Returns a list of configurations.
         /// </summary>
-        public IConfigurable[] Configurations => _configurations ?? (_configurations = new IConfigurable[]  {
+        public IConfigurable[] Configurations => _configurations ??= new IConfigurable[]  {
                 
             // Add more configurations here if needed.
             Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-0.json"), "Controller Port 0"),
             Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-1.json"), "Controller Port 1"),
             Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-2.json"), "Controller Port 2"),
             Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-3.json"), "Controller Port 3")
-        });
+        };
 
         private IConfigurable[] _configurations;
 

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
@@ -50,7 +51,7 @@ namespace Heroes.Controller.Hook.XInput
                 target.SetInputs -= OnSetInputs;
         }
 
-        private void OnSetInputs(ref Inputs inputs, int port) => _xInput.SendInputs(ref inputs, port);
+        private void OnSetInputs(ref IInputs inputs, int port) => _xInput.SendInputs(ref inputs, port);
 
         /* Mod loader actions. */
         public void Suspend()   => TearDownController();

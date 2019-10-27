@@ -1,11 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Heroes.Controller.Hook.Heroes;
-using Heroes.Controller.Hook.Interfaces;
-using Heroes.Controller.Hook.Interfaces.Enums;
-using Heroes.Controller.Hook.Interfaces.Internal;
-using Heroes.Controller.Hook.Interfaces.Structures;
+﻿using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Heroes.Controller.Hook.PostProcess.Configuration;
+using Heroes.SDK.Classes.PseudoNativeClasses;
+using Heroes.SDK.Definitions.Structures.Input;
 
 namespace Heroes.Controller.Hook
 {
@@ -15,8 +12,7 @@ namespace Heroes.Controller.Hook
     public unsafe class ReloadedController
     {
         // Sonic Heroes and XInput Controller
-        private HeroesController* _heroesControllerPtr;
-        private Inputs _lastFrameInputs;
+        private IInputs _lastFrameInputs = new Inputs();
         private int _port;
         private Config _config;
 
@@ -34,7 +30,6 @@ namespace Heroes.Controller.Hook
         public ReloadedController(int port, string modDirectory)
         {
             _port = port;
-            _heroesControllerPtr = HeroesControllerFactory.GetController(_port);
             _config = new Configurator(modDirectory).GetConfiguration<Config>(port);
         }
 
@@ -49,8 +44,9 @@ namespace Heroes.Controller.Hook
         /// </summary>
         public void SendInputs(ControllerHook hook)
         {
-            var inputs = _config.UseOriginalInputs
-                ? Inputs.FromHeroesController(*_heroesControllerPtr)
+            ref var heroesController = ref InputFunctions.Inputs[_port];
+            IInputs inputs = _config.UseOriginalInputs
+                ? Inputs.FromHeroesController(heroesController)
                 : new Inputs();
 
             // Get inputs from subscribers.
@@ -58,14 +54,13 @@ namespace Heroes.Controller.Hook
             hook.InvokePostProcessInputs(ref inputs, _port);
 
             // Convert to game structure and write to memory.
-            HeroesController.FromInputs(ref inputs, out var newInputs);
-            newInputs.Finalize(_lastFrameInputs.ButtonFlags);
-            *_heroesControllerPtr = newInputs;
+            ((Inputs) inputs).ToHeroesController(out var newInputs);
+            newInputs.Finalize((ButtonFlags) _lastFrameInputs.ButtonFlags);
+            heroesController = newInputs;
             _lastFrameInputs = inputs;
 
             // Broadcast final inputs to subscribers.
-            IHeroesController newInputsInterface = newInputs;
-            hook.InvokeOnInput(new ExtendedHeroesController(ref newInputsInterface, inputs.LeftTriggerPressure, inputs.RightTriggerPressure), _port);
+            hook.InvokeOnInput(new ExtendedHeroesController(ref heroesController, inputs.LeftTriggerPressure, inputs.RightTriggerPressure), _port);
         }
 
         /// <summary>
@@ -79,10 +74,10 @@ namespace Heroes.Controller.Hook
         /// </remarks>
         public void SetTriggers(SkyPad* skypad)
         {
-            if ((_lastFrameInputs.ButtonFlags & ButtonFlags.CameraL) == 0)
+            if ((_lastFrameInputs.ButtonFlags & (Interfaces.Definitions.ButtonFlags) ButtonFlags.CameraL) == 0)
                 (*skypad).TriggerPressureL = _lastFrameInputs.LeftTriggerPressure;
 
-            if ((_lastFrameInputs.ButtonFlags & ButtonFlags.CameraR) == 0)
+            if ((_lastFrameInputs.ButtonFlags & (Interfaces.Definitions.ButtonFlags) ButtonFlags.CameraR) == 0)
                 (*skypad).TriggerPressureR = _lastFrameInputs.RightTriggerPressure;
         }
     }

@@ -1,17 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Version>1.0.0</Version>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -31,16 +24,13 @@
 
   <ItemGroup>
     <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.5.0" />
-    <PackageReference Include="Reloaded.SharedLib.Hooks" Version="1.0.0" />
+    <PackageReference Include="Reloaded.SharedLib.Hooks" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Heroes.Controller.Hook.Interfaces\Heroes.Controller.Hook.Interfaces.csproj" />
     <ProjectReference Include="..\Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <NativeLibs Remove="Utility.cs" />
+    <ProjectReference Include="..\Submodules\Heroes.SDK\Heroes.SDK.Library\Heroes.SDK.csproj" />
   </ItemGroup>
 
   <ItemGroup>

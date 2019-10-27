@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
-using Heroes.Controller.Hook.Interfaces.Enums;
+using Heroes.Controller.Hook.Interfaces.Definitions;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using SharpDX.XInput;
 
 namespace Heroes.Controller.Hook.XInput
@@ -10,7 +11,7 @@ namespace Heroes.Controller.Hook.XInput
     /// </summary>
     public static class Converter
     {
-        public static void ToHeroesController(ref State state, ref Inputs inputs, Config configuration)
+        public static void ToHeroesController(ref State state, ref IInputs inputs, Config configuration)
         {
             // Buttons
             if (XInputButtonPressed(ref state, configuration.Jump))         inputs.ButtonFlags |= ButtonFlags.Jump;

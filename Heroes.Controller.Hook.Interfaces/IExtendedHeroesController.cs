@@ -1,8 +1,11 @@
-﻿using Heroes.Controller.Hook.Interfaces.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Heroes.Controller.Hook.Interfaces.Definitions;
 
-namespace Heroes.Controller.Hook.Interfaces.Internal
+namespace Heroes.Controller.Hook.Interfaces.Structures.Interfaces
 {
-    public interface IHeroesController
+    public interface IExtendedHeroesController
     {
         /// <summary>
         /// Contains the currently pressed buttons at any point.
@@ -46,5 +49,15 @@ namespace Heroes.Controller.Hook.Interfaces.Internal
         /// Range -1.0 to 1.0.
         /// </summary>
         float RightStickY { get; set; }
+
+        /// <summary>
+        /// Range 0 to 255.
+        /// </summary>
+        byte LeftTriggerPressure { get; set; }
+
+        /// <summary>
+        /// Range 0 to 255.
+        /// </summary>
+        byte RightTriggerPressure { get; set; }
     }
 }

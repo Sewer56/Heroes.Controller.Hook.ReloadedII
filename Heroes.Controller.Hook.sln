@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.Controller.Hook.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.Controller.Hook.XInput", "Heroes.Controller.Hook.XInput\Heroes.Controller.Hook.XInput.csproj", "{7D42BE68-55F0-424E-A83A-0E7E556E1D9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes.Controller.Hook.Shared", "Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj", "{625D8F57-C842-4DD2-922D-3D8BFB07ED6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.Controller.Hook.PostProcess", "Heroes.Controller.Hook.PostProcess\Heroes.Controller.Hook.PostProcess.csproj", "{F001C30E-2339-40CA-9714-34A15228DF9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes.Controller.Hook.PostProcess", "Heroes.Controller.Hook.PostProcess\Heroes.Controller.Hook.PostProcess.csproj", "{F001C30E-2339-40CA-9714-34A15228DF9A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{01F503DB-E6BF-4795-858E-29BC6BAEEC14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.SDK", "Submodules\Heroes.SDK\Heroes.SDK.Library\Heroes.SDK.csproj", "{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes.Controller.Hook.Shared", "Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj", "{B9481B36-B918-4576-9441-0C101F6D8750}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,17 +35,24 @@ Global
 		{7D42BE68-55F0-424E-A83A-0E7E556E1D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D42BE68-55F0-424E-A83A-0E7E556E1D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D42BE68-55F0-424E-A83A-0E7E556E1D9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{625D8F57-C842-4DD2-922D-3D8BFB07ED6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{625D8F57-C842-4DD2-922D-3D8BFB07ED6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{625D8F57-C842-4DD2-922D-3D8BFB07ED6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{625D8F57-C842-4DD2-922D-3D8BFB07ED6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F001C30E-2339-40CA-9714-34A15228DF9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F001C30E-2339-40CA-9714-34A15228DF9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F001C30E-2339-40CA-9714-34A15228DF9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F001C30E-2339-40CA-9714-34A15228DF9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9481B36-B918-4576-9441-0C101F6D8750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9481B36-B918-4576-9441-0C101F6D8750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9481B36-B918-4576-9441-0C101F6D8750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9481B36-B918-4576-9441-0C101F6D8750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753} = {01F503DB-E6BF-4795-858E-29BC6BAEEC14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B5102D1-444E-4C94-9C2F-BED66E37FC1A}

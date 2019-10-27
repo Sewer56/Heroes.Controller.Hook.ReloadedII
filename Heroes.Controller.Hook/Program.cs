@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.IO.Pipes;
 using Heroes.Controller.Hook.Interfaces;
+using Heroes.SDK;
+using Heroes.SDK.Definitions.Structures.Input;
+using Reloaded.Hooks;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
@@ -23,6 +26,7 @@ namespace Heroes.Controller.Hook
             #endif
             _modLoader = (IModLoader)loader;
             _modLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
+            SDK.SDK.Init(ReloadedHooks);
 
             /* Your mod code starts here. */
             _hook = new ControllerHook(_modLoader.GetDirectoryForModId(ThisModId));

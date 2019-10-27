@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
@@ -48,7 +49,7 @@ namespace Heroes.Controller.Hook.PostProcess
                 target.PostProcessInputs -= TargetOnPostProcessInputs;
         }
 
-        private void TargetOnPostProcessInputs(ref Inputs inputs, int port)
+        private void TargetOnPostProcessInputs(ref IInputs inputs, int port)
         {
             _postProcess.PostProcessInputs(ref inputs, port);
         }

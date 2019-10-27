@@ -1,9 +1,10 @@
 ﻿using System;
 using Heroes.Controller.Hook.Interfaces.Structures;
+using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 
 namespace Heroes.Controller.Hook.Interfaces
 {
-    public interface IControllerHookV1
+    public interface IControllerHook
     {
         /// <summary>
         /// This event allows you to send inputs to be registered by the game.
@@ -24,14 +25,12 @@ namespace Heroes.Controller.Hook.Interfaces
         event OnInputEvent OnInput;
     }
 
-    public interface IControllerHook : IControllerHookV1 { }
-
     /// <summary>
     /// Event used for manipulating the inputs sent to the game.
     /// </summary>
     /// <param name="inputs">The inputs structure to be sent to the game.</param>
     /// <param name="port">The controller port to get the inputs from.</param>
-    public delegate void InputEvent(ref Inputs inputs, int port);
+    public delegate void InputEvent(ref IInputs inputs, int port);
 
     /// <summary>
     /// Event used for reading the inputs sent to the game right before they are sent to the game.
@@ -39,6 +38,6 @@ namespace Heroes.Controller.Hook.Interfaces
     /// </summary>
     /// <param name="inputs">The inputs structure to be sent to the game.</param>
     /// <param name="port">The controller port to get the inputs from.</param>
-    public delegate void OnInputEvent(ExtendedHeroesController inputs, int port);
+    public delegate void OnInputEvent(IExtendedHeroesController inputs, int port);
 
 }
