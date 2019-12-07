@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 using Heroes.Controller.Hook.Shared.Configuration;
 using SharpDX.XInput;
 
@@ -9,6 +6,7 @@ namespace Heroes.Controller.Hook.XInput
 {
     public class Config : Configurable<Config>
     {
+        [JsonIgnore]
         public int                ControllerPort { get; set; } = -1; 
 
         public GamepadButtonFlags Jump          { get; set; } = GamepadButtonFlags.A;
