@@ -23,7 +23,14 @@ namespace Heroes.Controller.Hook.XInput
                 if (config.ControllerPort == -1)
                     config.ControllerPort = controllerNo;
 
-                config.Save();
+                // Self-updating Controller Bindings 
+                var controllerId = controllerNo;
+                config.ConfigurationUpdated += configurable =>
+                {
+                    _controllers[controllerId].Config = (Config) configurable;
+                    Program.Logger.WriteLine($"[{Program.MyModId}] Configuration for port {controllerId} updated.");
+                }; 
+
                 _controllers[config.ControllerPort] = new ControllerConfigTuple(new SharpDX.XInput.Controller((UserIndex) controllerNo), config);
             }
         }

@@ -3,7 +3,7 @@ using Heroes.Controller.Hook.Shared.Configuration;
 
 namespace Heroes.Controller.Hook.PostProcess
 {
-    public class Config : Configurable
+    public class Config : Configurable<Config>
     {
         public StickDeadzone LeftStickXDeadzone         { get; set; } = new StickDeadzone();
         public StickDeadzone LeftStickYDeadzone         { get; set; } = new StickDeadzone();

@@ -10,11 +10,13 @@ namespace Heroes.Controller.Hook.XInput
 {
     public class Program : IMod
     {
+        public const string MyModId = "sonicheroes.controller.hook.xinput";
         private const string HookModId = "sonicheroes.controller.hook";
-        private const string MyModId = "sonicheroes.controller.hook.xinput";
+        
+        public static IModLoader ModLoader;
+        public static ILogger Logger;
 
         private XInput _xInput;
-        private IModLoader _modLoader;
         private WeakReference<IControllerHook> _controllerHook;
         
         public void Start(IModLoaderV1 loader)
@@ -22,13 +24,14 @@ namespace Heroes.Controller.Hook.XInput
             #if DEBUG
             Debugger.Launch();
             #endif
-            _modLoader = (IModLoader)loader;
+            ModLoader = (IModLoader)loader;
+            Logger    = (ILogger) ModLoader.GetLogger();
 
             /* Your mod code starts here. */
-            string modDirectory = _modLoader.GetDirectoryForModId(MyModId);
+            string modDirectory = ModLoader.GetDirectoryForModId(MyModId);
 
             _xInput = new XInput(modDirectory);
-            _modLoader.ModLoaded += ModLoaded;
+            ModLoader.ModLoaded += ModLoaded;
             SetupController();
         }
 
@@ -40,7 +43,7 @@ namespace Heroes.Controller.Hook.XInput
 
         private void SetupController()
         {
-            _controllerHook = _modLoader.GetController<IControllerHook>();
+            _controllerHook = ModLoader.GetController<IControllerHook>();
             if (_controllerHook.TryGetTarget(out var target))
                 target.SetInputs += OnSetInputs;
         }

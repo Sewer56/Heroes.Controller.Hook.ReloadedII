@@ -10,10 +10,12 @@ namespace Heroes.Controller.Hook.PostProcess
 {
     public class Program : IMod
     {
+        public const string MyModId = "sonicheroes.controller.hook.postprocess";
         private const string HookModId  = "sonicheroes.controller.hook";
-        private const string MyModId    = "sonicheroes.controller.hook.postprocess";
 
-        private IModLoader _modLoader;
+        public static IModLoader ModLoader;
+        public static ILogger Logger;
+
         private WeakReference<IControllerHook> _controllerHook;
         private PostProcess _postProcess;
 
@@ -22,11 +24,12 @@ namespace Heroes.Controller.Hook.PostProcess
             #if DEBUG
             Debugger.Launch();
             #endif
-            _modLoader = (IModLoader)loader;
+            ModLoader = (IModLoader)loader;
+            Logger    = (ILogger) ModLoader.GetLogger();
 
             /* Your mod code starts here. */
-            _postProcess = new PostProcess(_modLoader.GetDirectoryForModId(MyModId));
-            _modLoader.ModLoaded += ModLoaded;
+            _postProcess = new PostProcess(ModLoader.GetDirectoryForModId(MyModId));
+            ModLoader.ModLoaded += ModLoaded;
             SetupController();
         }
 
@@ -38,7 +41,7 @@ namespace Heroes.Controller.Hook.PostProcess
 
         private void SetupController()
         {
-            _controllerHook = _modLoader.GetController<IControllerHook>();
+            _controllerHook = ModLoader.GetController<IControllerHook>();
             if (_controllerHook.TryGetTarget(out var target))
                 target.PostProcessInputs += TargetOnPostProcessInputs;
         }

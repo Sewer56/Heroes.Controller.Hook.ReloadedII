@@ -7,7 +7,7 @@ using SharpDX.XInput;
 
 namespace Heroes.Controller.Hook.XInput
 {
-    public class Config : Configurable
+    public class Config : Configurable<Config>
     {
         public int                ControllerPort { get; set; } = -1; 
 

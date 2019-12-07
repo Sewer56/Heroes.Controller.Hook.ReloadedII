@@ -6,7 +6,7 @@ using Heroes.Controller.Hook.Shared.Configuration;
 
 namespace Heroes.Controller.Hook
 {
-    public class Config : Configurable
+    public class Config : Configurable<Config>
     {
         /// <summary>
         /// Uses original inputs acquired from the game.

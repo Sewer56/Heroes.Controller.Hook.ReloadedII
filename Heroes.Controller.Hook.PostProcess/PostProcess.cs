@@ -19,7 +19,14 @@ namespace Heroes.Controller.Hook.PostProcess
             for (int x = 0; x < _configurations.Length; x++)
             {
                 _configurations[x] = _configurator.GetConfiguration<Config>(x);
-                _configurations[x].Save();
+
+                // Self-updating Controller Bindings 
+                var controllerId = x;
+                _configurations[x].ConfigurationUpdated += configurable =>
+                {
+                    _configurations[controllerId] = (Config) configurable;
+                    Program.Logger.WriteLine($"[{Program.MyModId}] Configuration for port {controllerId} updated.");
+                };
             }
         }
 

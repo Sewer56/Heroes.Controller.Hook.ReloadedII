@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Reloaded.Messaging.Serializer.SystemTextJson" Version="1.0.1" />
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.5.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.6.0" />
   </ItemGroup>
 
 </Project>

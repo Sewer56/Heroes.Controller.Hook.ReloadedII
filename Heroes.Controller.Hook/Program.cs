@@ -16,7 +16,9 @@ namespace Heroes.Controller.Hook
         public static IReloadedHooks ReloadedHooks; // Reloaded.Shared.Hooks is not unloadable. Therefore not using WeakReference is justified.
         public const string ThisModId = "sonicheroes.controller.hook";
 
-        private IModLoader _modLoader;
+        public static IModLoader ModLoader;
+        public static ILogger    Logger;
+
         private ControllerHook _hook;
 
         public void Start(IModLoaderV1 loader)
@@ -24,13 +26,15 @@ namespace Heroes.Controller.Hook
             #if DEBUG
             Debugger.Launch();
             #endif
-            _modLoader = (IModLoader)loader;
-            _modLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
+            ModLoader = (IModLoader)loader;
+            Logger = (ILogger) ModLoader.GetLogger();
+
+            ModLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
             SDK.SDK.Init(ReloadedHooks);
 
             /* Your mod code starts here. */
-            _hook = new ControllerHook(_modLoader.GetDirectoryForModId(ThisModId));
-            _modLoader.AddOrReplaceController<IControllerHook>(this, _hook);
+            _hook = new ControllerHook(ModLoader.GetDirectoryForModId(ThisModId));
+            ModLoader.AddOrReplaceController<IControllerHook>(this, _hook);
         }
 
         /* Mod loader actions. */

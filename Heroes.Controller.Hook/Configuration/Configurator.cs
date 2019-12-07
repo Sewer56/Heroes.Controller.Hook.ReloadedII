@@ -21,20 +21,39 @@ namespace Heroes.Controller.Hook.PostProcess.Configuration
 
         /// <summary>
         /// Returns a list of configurations.
-        /// </summary>
-        public IConfigurable[] Configurations => _configurations ??= new IConfigurable[]  {
-                
-            // Add more configurations here if needed.
-            Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-0.json"), "Controller Port 0"),
-            Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-1.json"), "Controller Port 1"),
-            Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-2.json"), "Controller Port 2"),
-            Configurable.Load<Config>(Path.Combine(ModFolder, "Controller-3.json"), "Controller Port 3")
-        };
+        /// </summary> 
+        public IUpdatableConfigurable[] Configurations => _configurations ?? MakeConfigurations();
+        private IUpdatableConfigurable[] _configurations;
 
-        private IConfigurable[] _configurations;
+        private IUpdatableConfigurable[] MakeConfigurations()
+        {
+            _configurations = new IUpdatableConfigurable[]
+            {
+                // Add more configurations here if needed.
+                Configurable<Config>.FromFile(Path.Combine(ModFolder, "Controller-0.json"), "Controller Port 0"),
+                Configurable<Config>.FromFile(Path.Combine(ModFolder, "Controller-1.json"), "Controller Port 1"),
+                Configurable<Config>.FromFile(Path.Combine(ModFolder, "Controller-2.json"), "Controller Port 2"),
+                Configurable<Config>.FromFile(Path.Combine(ModFolder, "Controller-3.json"), "Controller Port 3")
+            };
+
+            // Add self-updating to configurations.
+            for (int x = 0; x < Configurations.Length; x++)
+            {
+                var xCopy = x;
+                Configurations[x].ConfigurationUpdated += configurable =>
+                {
+                    Configurations[xCopy] = configurable;
+                };
+            }
+
+            return _configurations;
+        }
 
         public Configurator() { }
-        public Configurator(string modDirectory) : this() => ModFolder = modDirectory;
+        public Configurator(string modDirectory) : this()
+        {
+            ModFolder = modDirectory;
+        }
 
         /* Configurator */
 

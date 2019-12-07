@@ -11,6 +11,9 @@ namespace Heroes.Controller.Hook
     /// </summary>
     public unsafe class ReloadedController
     {
+        // Configurator.
+        private static Configurator _configurator;
+
         // Sonic Heroes and XInput Controller
         private IInputs _lastFrameInputs = new Inputs();
         private int _port;
@@ -29,8 +32,16 @@ namespace Heroes.Controller.Hook
         /// <param name="modDirectory"></param>
         public ReloadedController(int port, string modDirectory)
         {
-            _port = port;
-            _config = new Configurator(modDirectory).GetConfiguration<Config>(port);
+            if (_configurator == null)
+                _configurator = new Configurator(modDirectory);
+
+            _port   = port;
+            _config = _configurator.GetConfiguration<Config>(port);
+            _config.ConfigurationUpdated += newConfig =>
+            {
+                _config = (Config) newConfig;
+                Program.Logger.WriteLine($"[{Program.ThisModId}] Configuration for port {_port} updated.");
+            };
         }
 
         /*
