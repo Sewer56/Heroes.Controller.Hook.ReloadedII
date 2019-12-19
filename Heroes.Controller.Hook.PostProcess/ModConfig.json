@@ -6,6 +6,15 @@
   "ModDescription": "Provides common input post processing effects such as analog stick deadzones, swapping triggers etc.",
   "ModDll": "Heroes.Controller.Hook.PostProcess.dll",
   "ModIcon": "Preview.png",
-  "ModDependencies": [ "sonicheroes.controller.hook" ],
-  "SupportedAppId": [ "Tsonic_win.EXE", "tsonic_win.exe" ]
+  "ModR2RManagedDll32": "x86/Heroes.Controller.Hook.PostProcess.dll",
+  "ModR2RManagedDll64": "x64/Heroes.Controller.Hook.PostProcess.dll",
+  "ModNativeDll32": "",
+  "ModNativeDll64": "",
+  "ModDependencies": [
+    "sonicheroes.controller.hook"
+  ],
+  "OptionalDependencies": [],
+  "SupportedAppId": [
+    "tsonic_win.exe"
+  ]
 }

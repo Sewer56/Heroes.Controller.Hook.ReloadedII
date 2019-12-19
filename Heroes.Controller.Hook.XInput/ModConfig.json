@@ -6,6 +6,15 @@
   "ModDescription": "Feeds inputs to the Sonic Heroes Essentials",
   "ModDll": "Heroes.Controller.Hook.XInput.dll",
   "ModIcon": "Preview.png",
-  "ModDependencies": [ "sonicheroes.controller.hook" ],
-  "SupportedAppId": [ "Tsonic_win.EXE", "tsonic_win.exe" ]
+  "ModR2RManagedDll32": "x86/Heroes.Controller.Hook.XInput.dll",
+  "ModR2RManagedDll64": "x64/Heroes.Controller.Hook.XInput.dll",
+  "ModNativeDll32": "",
+  "ModNativeDll64": "",
+  "ModDependencies": [
+    "sonicheroes.controller.hook"
+  ],
+  "OptionalDependencies": [],
+  "SupportedAppId": [
+    "tsonic_win.exe"
+  ]
 }
