@@ -19,6 +19,7 @@ namespace Heroes.Controller.Hook.PostProcess
         private WeakReference<IControllerHook> _controllerHook;
         private PostProcess _postProcess;
 
+        public static void Main() { }
         public void Start(IModLoaderV1 loader)
         {
             #if DEBUG

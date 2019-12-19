@@ -21,6 +21,7 @@ namespace Heroes.Controller.Hook
 
         private ControllerHook _hook;
 
+        public static void Main() { }
         public void Start(IModLoaderV1 loader)
         {
             #if DEBUG

@@ -18,7 +18,8 @@ namespace Heroes.Controller.Hook.XInput
 
         private XInput _xInput;
         private WeakReference<IControllerHook> _controllerHook;
-        
+
+        public static void Main() { }
         public void Start(IModLoaderV1 loader)
         {
             #if DEBUG
