@@ -31,7 +31,7 @@ namespace Heroes.Controller.Hook
             Logger = (ILogger) ModLoader.GetLogger();
 
             ModLoader.GetController<IReloadedHooks>().TryGetTarget(out ReloadedHooks);
-            SDK.SDK.Init(ReloadedHooks);
+            SDK.SDK.Init(ReloadedHooks, null);
 
             /* Your mod code starts here. */
             _hook = new ControllerHook(ModLoader.GetDirectoryForModId(ThisModId));
