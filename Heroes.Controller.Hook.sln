@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.SDK", "Submodules\Heroes.SDK\Heroes.SDK.Library\Heroes.SDK.csproj", "{E920B7E6-F24C-4E77-AA7B-8BEF85EF0753}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes.Controller.Hook.Shared", "Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj", "{B9481B36-B918-4576-9441-0C101F6D8750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroes.Controller.Hook.Shared", "Heroes.Controller.Hook.Shared\Heroes.Controller.Hook.Shared.csproj", "{B9481B36-B918-4576-9441-0C101F6D8750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroes.Controller.Hook.Custom", "Heroes.Controller.Hook.Custom\Heroes.Controller.Hook.Custom.csproj", "{53436F69-6BF6-474D-AF11-E61AC726446D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{B9481B36-B918-4576-9441-0C101F6D8750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9481B36-B918-4576-9441-0C101F6D8750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9481B36-B918-4576-9441-0C101F6D8750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53436F69-6BF6-474D-AF11-E61AC726446D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53436F69-6BF6-474D-AF11-E61AC726446D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53436F69-6BF6-474D-AF11-E61AC726446D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53436F69-6BF6-474D-AF11-E61AC726446D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
