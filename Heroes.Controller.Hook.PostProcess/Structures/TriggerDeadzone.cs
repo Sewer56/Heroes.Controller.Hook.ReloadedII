@@ -7,23 +7,38 @@ namespace Heroes.Controller.Hook.PostProcess.Structures
     {
         public bool  IsEnabled          { get; set; }
         public float DeadzonePercent    { get; set; }
+        public float RadiusScale        { get; set; } = 1.0f;
+        public bool  IsInverted         { get; set; } = false;
 
-        [JsonIgnore]
-        public float MinimumPressure  => (DeadzonePercent / Percent.MaxValue) * byte.MaxValue;
+        public float GetMinimumPressure()  => (DeadzonePercent / Percent.MaxValue) * byte.MaxValue;
 
-        /// <summary>
-        /// Applies the deadzone to the provided trigger value.
-        /// If the value is in the deadzone and the deadzone is enabled, returns 0, otherwise returns original value.
-        /// </summary>
-        /// <param name="triggerValue">Value between 0 and 255.</param>
+        public byte ApplySettings(byte stickValue)
+        {
+            stickValue = ApplyDeadzone(stickValue);
+            stickValue = ScaleValue(stickValue);
+            if (IsInverted)
+                stickValue = (byte)(byte.MaxValue - stickValue);
+
+            return stickValue;
+        }
+
+        public byte ScaleValue(byte stickValue)
+        {
+            var scaled = stickValue * RadiusScale;
+            if (scaled > byte.MaxValue)
+                scaled = byte.MaxValue;
+
+            return (byte)scaled;
+        }
+
         public byte ApplyDeadzone(byte triggerValue)
         {
-            if (triggerValue < MinimumPressure && IsEnabled)
+            if (triggerValue < GetMinimumPressure() && IsEnabled)
                 return 0;
 
             return triggerValue;
         }
 
-        public override string ToString() => $"Enabled: {IsEnabled}, DeadzonePercent: {DeadzonePercent}";
+        public override string ToString() => $"Enabled: {IsEnabled}, Deadzone: {DeadzonePercent}, Invert: {IsInverted}";
     }
 }

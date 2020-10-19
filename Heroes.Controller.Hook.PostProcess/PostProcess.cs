@@ -37,12 +37,12 @@ namespace Heroes.Controller.Hook.PostProcess
         {
             var config = _configurations[port];
 
-            inputs.LeftStickX = config.LeftStickXDeadzone.ApplyDeadzone(inputs.LeftStickX);
-            inputs.LeftStickY = config.LeftStickYDeadzone.ApplyDeadzone(inputs.LeftStickY);
-            inputs.RightStickX = config.RightStickXDeadzone.ApplyDeadzone(inputs.RightStickX);
-            inputs.RightStickY = config.RightStickYDeadzone.ApplyDeadzone(inputs.RightStickY);
-            inputs.LeftTriggerPressure = config.LeftTriggerDeadzone.ApplyDeadzone(inputs.LeftTriggerPressure);
-            inputs.RightTriggerPressure = config.RightTriggerDeadzone.ApplyDeadzone(inputs.RightTriggerPressure);
+            inputs.LeftStickX = config.LeftStickXDeadzone.ApplySettings(inputs.LeftStickX);
+            inputs.LeftStickY = config.LeftStickYDeadzone.ApplySettings(inputs.LeftStickY);
+            inputs.RightStickX = config.RightStickXDeadzone.ApplySettings(inputs.RightStickX);
+            inputs.RightStickY = config.RightStickYDeadzone.ApplySettings(inputs.RightStickY);
+            inputs.LeftTriggerPressure = config.LeftTriggerDeadzone.ApplySettings(inputs.LeftTriggerPressure);
+            inputs.RightTriggerPressure = config.RightTriggerDeadzone.ApplySettings(inputs.RightTriggerPressure);
 
             if (config.SwapTriggers)
             {
