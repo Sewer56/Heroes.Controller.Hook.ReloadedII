@@ -1,5 +1,5 @@
 # Project Output Paths
-$modOutputPath = "TempBuild"
+$modOutputPath = "Release"
 $solutionName = "Heroes.Controller.Hook.Custom/Heroes.Controller.Hook.Custom.csproj"
 $publishName = "sonicheroes.controller.hook.custom.zip"
 $publishDirectory = "Publish"

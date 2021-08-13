@@ -31,3 +31,6 @@ Get-ChildItem $modOutputPath -Include *.xml -Recurse | Remove-Item -Force -Recur
 # Compress
 Add-Type -A System.IO.Compression.FileSystem
 [IO.Compression.ZipFile]::CreateFromDirectory($modOutputPath, "$publishDirectory/$publishName")
+
+# Cleanup After Build
+Remove-Item $modOutputPath -Recurse
