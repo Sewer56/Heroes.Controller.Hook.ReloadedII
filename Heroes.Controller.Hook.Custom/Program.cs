@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 using Heroes.Controller.Hook.Interfaces;
@@ -28,13 +27,6 @@ namespace Heroes.Controller.Hook.Custom
         private IModLoader _modLoader;
 
         /// <summary>
-        /// An interface to Reloaded's the function hooks/detours library.
-        /// See: https://github.com/Reloaded-Project/Reloaded.Hooks
-        ///      for documentation and samples. 
-        /// </summary>
-        private IReloadedHooks _hooks;
-
-        /// <summary>
         /// Stores a reference to the controller hook in other mod.
         /// </summary>
         private WeakReference<IControllerHook> _controllerHook;
@@ -47,7 +39,6 @@ namespace Heroes.Controller.Hook.Custom
         {
             _modLoader = (IModLoader)loader;
             _logger = (ILogger)_modLoader.GetLogger();
-
 
             /* Your mod code starts here. */
             _input = new Input(_modLoader.GetDirectoryForModId(MyModId));
