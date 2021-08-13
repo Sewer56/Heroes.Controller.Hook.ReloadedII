@@ -25,7 +25,7 @@ namespace Heroes.Controller.Hook
 
             // Hook get controls function.
             _psPadServerHook            = InputFunctions.Fun_psPADServerPC.Hook(PSPADServerImpl).Activate();
-            _periMakeRepeatCountHook    = GamePeri.Fun_MakeRepeatCount.Hook(MakeRepeatCountImpl, 20).Activate();
+            _periMakeRepeatCountHook    = GamePeri.Fun_MakeRepeatCount.Hook(MakeRepeatCountImpl).Activate();
         }
 
         /// <summary>
