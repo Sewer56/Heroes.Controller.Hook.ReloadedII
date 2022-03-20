@@ -7,7 +7,17 @@
     <ApplicationIcon />
     <OutputType>WinExe</OutputType>
     <StartupObject />
+    <LangVersion>preview</LangVersion>
+    <RobustILLink>true</RobustILLink>
   </PropertyGroup>
+
+  <ItemGroup>
+    <RobustLinkRoots Include="Heroes.Controller.Hook.XInput" />
+    <RobustLinkAssemblies Include="SharpDX" />
+    <RobustLinkAssemblies Include="SharpDX.XInput" />
+  </ItemGroup>
+
+  <Import Project="../Robust.Trimming.targets" />
 
   <ItemGroup>
     <None Remove="ModConfig.json" />
