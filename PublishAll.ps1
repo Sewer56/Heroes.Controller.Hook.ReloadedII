@@ -7,6 +7,7 @@ Split-Path $MyInvocation.MyCommand.Path | Push-Location
               -PackageName "Heroes.Controller.Hook.Custom" `
               -PublishOutputDir "Publish/ToUpload/Custom" `
               -MetadataFileName "Heroes.Controller.Hook.Custom.ReleaseMetadata.json" `
+			  -RemoveExe $False
 
 ./Publish.ps1 -ProjectPath "Heroes.Controller.Hook.PostProcess/Heroes.Controller.Hook.PostProcess.csproj" `
               -PackageName "Heroes.Controller.Hook.PostProcess" `

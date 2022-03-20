@@ -125,6 +125,11 @@
 
     Whether the project should be built.
     Setting this to false lets you use the publish part of the script standalone in a non .NET environment.
+	
+.PARAMETER RemoveExe
+    Default: $True
+
+    Removes executables from build output. Useful when performing R2R Optimisation.
 
 .EXAMPLE
   .\Publish.ps1 -ProjectPath "Reloaded.Hooks.ReloadedII/Reloaded.Hooks.ReloadedII.csproj" -PackageName "Reloaded.Hooks.ReloadedII" -PublishOutputDir "Publish/ToUpload"
@@ -143,7 +148,8 @@ param (
     $ChangelogPath="",
     $Build=$True,
     $BuildR2R=$False,
-    
+    $RemoveExe = $True,
+	
     ## => User Config <= ## 
     $ProjectPath = "Reloaded.Hooks.ReloadedII/Reloaded.Hooks.ReloadedII.csproj",
     $PackageName = "Reloaded.Hooks.ReloadedII",
@@ -198,6 +204,7 @@ $IsPrerelease = [bool]::Parse($IsPrerelease)
 $MakeDelta = [bool]::Parse($MakeDelta)
 $Build = [bool]::Parse($Build)
 $BuildR2R = [bool]::Parse($BuildR2R)
+$RemoveExe = [bool]::Parse($RemoveExe)
 $UseGitHubDelta = [bool]::Parse($UseGitHubDelta)
 $UseGameBananaDelta = [bool]::Parse($UseGameBananaDelta)
 $UseNuGetDelta = [bool]::Parse($UseNuGetDelta)
@@ -254,7 +261,10 @@ function Build {
     }
 
     # Cleanup Unnecessary Files
-    Get-ChildItem $publishBuildDirectory -Include *.exe -Recurse | Remove-Item -Force -Recurse
+	if ($RemoveExe) {
+        Get-ChildItem $publishBuildDirectory -Include *.exe -Recurse | Remove-Item -Force -Recurse
+	}
+	
     Get-ChildItem $publishBuildDirectory -Include *.pdb -Recurse | Remove-Item -Force -Recurse
     Get-ChildItem $publishBuildDirectory -Include *.xml -Recurse | Remove-Item -Force -Recurse
 }
