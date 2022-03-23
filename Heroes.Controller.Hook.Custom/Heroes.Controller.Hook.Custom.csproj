@@ -9,6 +9,7 @@
 	  <RollForward>Major</RollForward>
     <LangVersion>preview</LangVersion>
     <RobustILLink>true</RobustILLink>
+    <OutputPath>$(RELOADEDIIMODS)\sonicheroes.controller.hook.custom</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,7 +38,8 @@
   <ItemGroup>
     <PackageReference Include="Reloaded.Input" Version="1.0.4" />
     <PackageReference Include="Reloaded.Input.Configurator" Version="1.0.3" />
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.9.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
+    <PackageReference Include="Reloaded.Mod.Loader.IO" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
