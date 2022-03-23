@@ -2,7 +2,7 @@
   "ModId": "sonicheroes.controller.hook.xinput",
   "ModName": "SH Essentials: XInput for Controller Hook",
   "ModAuthor": "Sewer56",
-  "ModVersion": "2.1.2",
+  "ModVersion": "2.1.3",
   "ModDescription": "Feeds inputs to the Sonic Heroes Essentials",
   "ModDll": "Heroes.Controller.Hook.XInput.dll",
   "ModIcon": "Preview.png",
@@ -10,6 +10,23 @@
   "ModR2RManagedDll64": "x64/Heroes.Controller.Hook.XInput.dll",
   "ModNativeDll32": "",
   "ModNativeDll64": "",
+  "IsLibrary": false,
+  "ReleaseMetadataFileName": "Sewer56.Update.ReleaseMetadata.json",
+  "PluginData": {
+    "GitHubDependencies": {
+      "IdToConfigMap": {
+        "reloaded.sharedlib.hooks": {
+          "Config": {
+            "UserName": "Reloaded.SharedLib.Hooks.ReloadedII",
+            "RepositoryName": "Sewer56",
+            "UseReleaseTag": true,
+            "AssetFileName": "reloaded.sharedlib.hooks.zip"
+          }
+        }
+      }
+    }
+  },
+  "IsUniversalMod": false,
   "ModDependencies": [
     "sonicheroes.controller.hook"
   ],
