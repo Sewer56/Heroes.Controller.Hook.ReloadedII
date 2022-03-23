@@ -1,5 +1,7 @@
 ﻿using System;
+#if DEBUG
 using System.Diagnostics;
+#endif
 using Heroes.Controller.Hook.Interfaces;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
