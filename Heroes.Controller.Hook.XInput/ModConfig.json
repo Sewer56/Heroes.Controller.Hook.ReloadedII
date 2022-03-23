@@ -11,7 +11,7 @@
   "ModNativeDll32": "",
   "ModNativeDll64": "",
   "IsLibrary": false,
-  "ReleaseMetadataFileName": "Sewer56.Update.ReleaseMetadata.json",
+  "ReleaseMetadataFileName": "Heroes.Controller.Hook.XInput.ReleaseMetadata.json",
   "PluginData": {
     "GitHubDependencies": {
       "IdToConfigMap": {
@@ -24,6 +24,12 @@
           }
         }
       }
+    },
+    "GitHubRelease": {
+      "UserName": "Sewer56",
+      "RepositoryName": "Heroes.Controller.Hook.ReloadedII",
+      "UseReleaseTag": false,
+      "AssetFileName": "Mod.zip"
     }
   },
   "IsUniversalMod": false,
