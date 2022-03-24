@@ -14,11 +14,16 @@
 
   <ItemGroup>
     <RobustLinkRoots Include="sonicheroes.controller.hook.custom" />
+    <RobustLinkRoots Include="Reloaded.Input" />
+    <RobustLinkRoots Include="Reloaded.Input.Configurator" />
+    <RobustLinkRoots Include="Reloaded.Mod.Loader.IO" />
+
+    <RobustLinkAssemblies Include="Enums.NET" />
     <RobustLinkAssemblies Include="Heroes.SDK" />
     <RobustLinkAssemblies Include="Reloaded.Memory" />
     <RobustLinkAssemblies Include="SharpDX" />
-    <RobustLinkAssemblies Include="SharpDX.XInput" />
     <RobustLinkAssemblies Include="SharpDX.DirectInput" />
+    <RobustLinkAssemblies Include="SharpDX.XInput" />
   </ItemGroup>
 
   <Import Project="../Robust.Trimming.targets" />
@@ -40,6 +45,7 @@
     <PackageReference Include="Reloaded.Input.Configurator" Version="1.0.3" />
     <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
     <PackageReference Include="Reloaded.Mod.Loader.IO" Version="2.1.2" />
+    <PackageReference Include="Reloaded.WPF.Theme.Default" Version="3.0.6" />
   </ItemGroup>
 
   <ItemGroup>
