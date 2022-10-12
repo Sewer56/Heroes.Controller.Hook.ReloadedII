@@ -2,7 +2,7 @@
   "ModId": "sonicheroes.controller.hook.custom",
   "ModName": "Custom Mapping for Heroes Controller Hook",
   "ModAuthor": "Sewer56",
-  "ModVersion": "2.0.0",
+  "ModVersion": "3.0.0",
   "ModDescription": "Map your own controller configuration.",
   "ModDll": "sonicheroes.controller.hook.custom.dll",
   "ModIcon": "Preview.png",
@@ -15,13 +15,23 @@
   "PluginData": {
     "GitHubDependencies": {
       "IdToConfigMap": {
+        "sonicheroes.controller.hook": {
+          "Config": {
+            "UserName": "Heroes.Controller.Hook.ReloadedII",
+            "RepositoryName": "Sewer56",
+            "UseReleaseTag": false,
+            "AssetFileName": "Mod.zip"
+          },
+          "ReleaseMetadataName": "Heroes.Controller.Hook.ReleaseMetadata.json"
+        },
         "reloaded.sharedlib.hooks": {
           "Config": {
             "UserName": "Reloaded.SharedLib.Hooks.ReloadedII",
             "RepositoryName": "Sewer56",
             "UseReleaseTag": true,
             "AssetFileName": "reloaded.sharedlib.hooks.zip"
-          }
+          },
+          "ReleaseMetadataName": "Sewer56.Update.ReleaseMetadata.json"
         }
       }
     },

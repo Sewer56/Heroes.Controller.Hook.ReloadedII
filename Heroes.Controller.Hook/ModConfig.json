@@ -2,7 +2,7 @@
   "ModId": "sonicheroes.controller.hook",
   "ModName": "SH Essentials: Controller Hook",
   "ModAuthor": "Sewer56",
-  "ModVersion": "2.2.0",
+  "ModVersion": "2.2.1",
   "ModDescription": "Mod that provides support for other mods to feed arbitrary inputs to Sonic Heroes",
   "ModDll": "Heroes.Controller.Hook.dll",
   "ModIcon": "Preview.png",
