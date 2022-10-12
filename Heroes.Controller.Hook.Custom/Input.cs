@@ -41,8 +41,7 @@ public class Input
             return;
         
         var controller = _controllers[port];
-        if (port == 0) // this polls all known controllers on all slots, as it polls using manager.
-            controller.PollAll();
+        controller.PollAll();
 
         // Buttons 
         if (controller.GetButton((int)MappingEntries.Jump)) inputs.ButtonFlags |= ButtonFlags.Jump;
