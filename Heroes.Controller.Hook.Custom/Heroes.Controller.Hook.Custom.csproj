@@ -7,26 +7,25 @@
     <OutputType>WinExe</OutputType>
     <AssemblyName>sonicheroes.controller.hook.custom</AssemblyName>
 	  <RollForward>Major</RollForward>
-    <LangVersion>preview</LangVersion>
-    <RobustILLink>true</RobustILLink>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ReloadedILLink>true</ReloadedILLink>
     <OutputPath>$(RELOADEDIIMODS)\sonicheroes.controller.hook.custom</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <RobustLinkRoots Include="sonicheroes.controller.hook.custom" />
-    <RobustLinkRoots Include="Reloaded.Input" />
-    <RobustLinkRoots Include="Reloaded.Input.Configurator" />
-    <RobustLinkRoots Include="Reloaded.Mod.Loader.IO" />
+    <ReloadedLinkRoots Include="sonicheroes.controller.hook.custom" />
+    <ReloadedLinkRoots Include="Reloaded.Input" />
+    <ReloadedLinkRoots Include="Reloaded.Input.Configurator" />
+    <ReloadedLinkRoots Include="Reloaded.Mod.Loader.IO" />
+    <ReloadedLinkRoots Include="System.Runtime.CompilerServices.Unsafe" />
 
-    <RobustLinkAssemblies Include="Enums.NET" />
-    <RobustLinkAssemblies Include="Heroes.SDK" />
-    <RobustLinkAssemblies Include="Reloaded.Memory" />
-    <RobustLinkAssemblies Include="SharpDX" />
-    <RobustLinkAssemblies Include="SharpDX.DirectInput" />
-    <RobustLinkAssemblies Include="SharpDX.XInput" />
+    <ReloadedLinkAssemblies Include="Enums.NET" />
+    <ReloadedLinkAssemblies Include="Heroes.SDK" />
+    <ReloadedLinkAssemblies Include="Reloaded.Memory" />
   </ItemGroup>
 
-  <Import Project="../Robust.Trimming.targets" />
+  <Import Project="../Reloaded.Trimming.targets" />
 
   <ItemGroup>
     <None Remove="ModConfig.json" />
@@ -41,11 +40,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Input" Version="1.0.4" />
-    <PackageReference Include="Reloaded.Input.Configurator" Version="1.0.3" />
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
-    <PackageReference Include="Reloaded.Mod.Loader.IO" Version="2.1.2" />
-    <PackageReference Include="Reloaded.WPF.Theme.Default" Version="3.0.6" />
+    <PackageReference Include="Reloaded.Input" Version="2.0.1" />
+    <PackageReference Include="Reloaded.Input.Configurator" Version="2.1.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.3.0" />
+    <PackageReference Include="Reloaded.Mod.Loader.IO" Version="2.4.4" />
+    <PackageReference Include="Reloaded.WPF.Theme.Default" Version="3.2.1" />
   </ItemGroup>
 
   <ItemGroup>

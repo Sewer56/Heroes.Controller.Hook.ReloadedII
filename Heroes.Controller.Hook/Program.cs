@@ -1,5 +1,4 @@
-﻿using System;
-#if DEBUG
+﻿#if DEBUG
 using System.Diagnostics;
 #endif
 using Heroes.Controller.Hook.Interfaces;

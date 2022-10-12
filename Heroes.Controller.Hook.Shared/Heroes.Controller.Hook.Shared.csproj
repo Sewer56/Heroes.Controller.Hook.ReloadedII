@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Messaging.Serializer.SystemTextJson" Version="1.0.1" />
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="1.9.0" />
+    <PackageReference Include="Reloaded.Messaging.Serializer.SystemTextJson" Version="1.0.2" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.3.0" ExcludeAssets="runtime" />
   </ItemGroup>
 
 </Project>

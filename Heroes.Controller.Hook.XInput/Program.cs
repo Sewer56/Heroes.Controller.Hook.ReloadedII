@@ -1,5 +1,4 @@
-﻿using System;
-#if DEBUG
+﻿#if DEBUG
 using System.Diagnostics;
 #endif
 using Heroes.Controller.Hook.Interfaces;
@@ -67,6 +66,4 @@ public class Program : IMod
     public bool CanUnload()  => true;
     public bool CanSuspend() => true;
     public Action Disposing { get; }
-
-    public static void Main() { }
 }

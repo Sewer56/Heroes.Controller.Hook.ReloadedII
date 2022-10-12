@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.ObjectModel;
 using Heroes.Controller.Hook.Custom.Enum;
 using Heroes.Controller.Hook.Interfaces.Definitions;
 using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
@@ -39,57 +37,58 @@ public class Input
 
     public void SetInputs(ref IInputs inputs, in int port)
     {
-        if (port >= 0 && port < _controllers.Length)
-        {
-            var controller = _controllers[port];
+        if (port < 0 || port >= _controllers.Length) 
+            return;
+        
+        var controller = _controllers[port];
+        if (port == 0) // this polls all known controllers on all slots, as it polls using manager.
+            controller.PollAll();
 
-            // Buttons 
-            if (controller.GetButton((int)MappingEntries.Jump)) inputs.ButtonFlags |= ButtonFlags.Jump;
-            if (controller.GetButton((int)MappingEntries.Action)) inputs.ButtonFlags |= ButtonFlags.Action;
-            if (controller.GetButton((int)MappingEntries.FormationR)) inputs.ButtonFlags |= ButtonFlags.FormationR;
-            if (controller.GetButton((int)MappingEntries.FormationL)) inputs.ButtonFlags |= ButtonFlags.FormationL;
-            if (controller.GetButton((int)MappingEntries.DPadUp)) inputs.ButtonFlags |= ButtonFlags.DpadUp;
-            if (controller.GetButton((int)MappingEntries.DPadDown)) inputs.ButtonFlags |= ButtonFlags.DpadDown;
-            if (controller.GetButton((int)MappingEntries.DPadLeft)) inputs.ButtonFlags |= ButtonFlags.DpadLeft;
-            if (controller.GetButton((int)MappingEntries.DPadRight)) inputs.ButtonFlags |= ButtonFlags.DpadRight;
-            if (controller.GetButton((int)MappingEntries.CameraR)) inputs.ButtonFlags |= ButtonFlags.CameraR;
-            if (controller.GetButton((int)MappingEntries.CameraL)) inputs.ButtonFlags |= ButtonFlags.CameraL;
-            if (controller.GetButton((int)MappingEntries.Start)) inputs.ButtonFlags |= ButtonFlags.Start;
-            if (controller.GetButton((int)MappingEntries.TeamBlast)) inputs.ButtonFlags |= ButtonFlags.TeamBlast;
+        // Buttons 
+        if (controller.GetButton((int)MappingEntries.Jump)) inputs.ButtonFlags |= ButtonFlags.Jump;
+        if (controller.GetButton((int)MappingEntries.Action)) inputs.ButtonFlags |= ButtonFlags.Action;
+        if (controller.GetButton((int)MappingEntries.FormationR)) inputs.ButtonFlags |= ButtonFlags.FormationR;
+        if (controller.GetButton((int)MappingEntries.FormationL)) inputs.ButtonFlags |= ButtonFlags.FormationL;
+        if (controller.GetButton((int)MappingEntries.DPadUp)) inputs.ButtonFlags |= ButtonFlags.DpadUp;
+        if (controller.GetButton((int)MappingEntries.DPadDown)) inputs.ButtonFlags |= ButtonFlags.DpadDown;
+        if (controller.GetButton((int)MappingEntries.DPadLeft)) inputs.ButtonFlags |= ButtonFlags.DpadLeft;
+        if (controller.GetButton((int)MappingEntries.DPadRight)) inputs.ButtonFlags |= ButtonFlags.DpadRight;
+        if (controller.GetButton((int)MappingEntries.CameraR)) inputs.ButtonFlags |= ButtonFlags.CameraR;
+        if (controller.GetButton((int)MappingEntries.CameraL)) inputs.ButtonFlags |= ButtonFlags.CameraL;
+        if (controller.GetButton((int)MappingEntries.Start)) inputs.ButtonFlags |= ButtonFlags.Start;
+        if (controller.GetButton((int)MappingEntries.TeamBlast)) inputs.ButtonFlags |= ButtonFlags.TeamBlast;
 
-            // Axis
+        // Axis
+        var leftStickX = controller.GetAxis((int)MappingEntries.LeftStickX);
+        var leftStickY = controller.GetAxis((int)MappingEntries.LeftStickY);
+        var rightStickX = controller.GetAxis((int)MappingEntries.RightStickX);
+        var rightStickY = controller.GetAxis((int)MappingEntries.RightStickY);
+        var leftBumper = controller.GetAxis((int)MappingEntries.LeftTriggerPressure);
+        var rightBumper = controller.GetAxis((int)MappingEntries.RightTriggerPressure);
+
+        inputs.LeftStickX = AnalogToHeroesRange(leftStickX);
+        inputs.LeftStickY = AnalogToHeroesRange(-leftStickY);
+        inputs.RightStickX = AnalogToHeroesRange(rightStickX);
+        inputs.RightStickY = AnalogToHeroesRange(-rightStickY);
+
+        if (controller.GetMapping((int) MappingEntries.LeftTriggerPressure) != null)
+            inputs.LeftTriggerPressure = TriggerToHeroesRange(leftBumper);
+
+        if (controller.GetMapping((int) MappingEntries.RightTriggerPressure) != null)
+            inputs.RightTriggerPressure = TriggerToHeroesRange(rightBumper);
                 
-            var leftStickX = controller.GetAxis((int)MappingEntries.LeftStickX);
-            var leftStickY = controller.GetAxis((int)MappingEntries.LeftStickY);
-            var rightStickX = controller.GetAxis((int)MappingEntries.RightStickX);
-            var rightStickY = controller.GetAxis((int)MappingEntries.RightStickY);
-            var leftBumper = controller.GetAxis((int)MappingEntries.LeftTriggerPressure);
-            var rightBumper = controller.GetAxis((int)MappingEntries.RightTriggerPressure);
+        // Button to Axis
+        if (controller.GetButton((int)MappingEntries.Up)) inputs.LeftStickY = -1.0f;
+        if (controller.GetButton((int)MappingEntries.Down)) inputs.LeftStickY = 1.0f;
+        if (controller.GetButton((int)MappingEntries.Left)) inputs.LeftStickX = -1.0f;
+        if (controller.GetButton((int)MappingEntries.Right)) inputs.LeftStickX = 1.0f;
+        if (controller.GetButton((int)MappingEntries.RSUp)) inputs.RightStickY = -1.0f;
+        if (controller.GetButton((int)MappingEntries.RSDown)) inputs.RightStickY = 1.0f;
+        if (controller.GetButton((int)MappingEntries.RSLeft)) inputs.RightStickX = -1.0f;
+        if (controller.GetButton((int)MappingEntries.RSRight)) inputs.RightStickX = 1.0f;
 
-            inputs.LeftStickX = AnalogToHeroesRange(leftStickX);
-            inputs.LeftStickY = AnalogToHeroesRange(-leftStickY);
-            inputs.RightStickX = AnalogToHeroesRange(rightStickX);
-            inputs.RightStickY = AnalogToHeroesRange(-rightStickY);
-
-            if (controller.GetMapping((int) MappingEntries.LeftTriggerPressure) != null)
-                inputs.LeftTriggerPressure = TriggerToHeroesRange(leftBumper);
-
-            if (controller.GetMapping((int) MappingEntries.RightTriggerPressure) != null)
-                inputs.RightTriggerPressure = TriggerToHeroesRange(rightBumper);
-                
-            // Button to Axis
-            if (controller.GetButton((int)MappingEntries.Up)) inputs.LeftStickY = -1.0f;
-            if (controller.GetButton((int)MappingEntries.Down)) inputs.LeftStickY = 1.0f;
-            if (controller.GetButton((int)MappingEntries.Left)) inputs.LeftStickX = -1.0f;
-            if (controller.GetButton((int)MappingEntries.Right)) inputs.LeftStickX = 1.0f;
-            if (controller.GetButton((int)MappingEntries.RSUp)) inputs.RightStickY = -1.0f;
-            if (controller.GetButton((int)MappingEntries.RSDown)) inputs.RightStickY = 1.0f;
-            if (controller.GetButton((int)MappingEntries.RSLeft)) inputs.RightStickX = -1.0f;
-            if (controller.GetButton((int)MappingEntries.RSRight)) inputs.RightStickX = 1.0f;
-
-            if (controller.GetButton((int)MappingEntries.LeftTrigger)) inputs.LeftTriggerPressure = 255;
-            if (controller.GetButton((int)MappingEntries.RightTrigger)) inputs.RightTriggerPressure = 255;
-        }
+        if (controller.GetButton((int)MappingEntries.LeftTrigger)) inputs.LeftTriggerPressure = 255;
+        if (controller.GetButton((int)MappingEntries.RightTrigger)) inputs.RightTriggerPressure = 255;
     }
 
     public void Configure()

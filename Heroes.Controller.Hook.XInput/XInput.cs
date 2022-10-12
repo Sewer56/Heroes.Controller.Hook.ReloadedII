@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
+﻿using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Heroes.Controller.Hook.XInput.Configuration;
 using SharpDX.XInput;
 

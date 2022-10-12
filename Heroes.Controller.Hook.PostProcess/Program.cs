@@ -1,5 +1,4 @@
-﻿using System;
-using Heroes.Controller.Hook.Interfaces;
+﻿using Heroes.Controller.Hook.Interfaces;
 using Heroes.Controller.Hook.Interfaces.Structures.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
@@ -70,6 +69,4 @@ public class Program : IMod
 
     /* Automatically called by the mod loader when the mod is about to be unloaded. */
     public Action Disposing { get; }
-
-    public static void Main() { }
 }

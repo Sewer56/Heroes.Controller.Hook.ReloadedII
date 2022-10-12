@@ -3,7 +3,7 @@ using Reloaded.Mod.Interfaces;
 
 namespace Heroes.Controller.Hook.Custom.Configuration.Implementation;
 
-public class Configurator : IConfigurator
+public class Configurator : IConfiguratorV1
 {
     /* For latest documentation:
         - See the interface! (Go To Definition) or if not available

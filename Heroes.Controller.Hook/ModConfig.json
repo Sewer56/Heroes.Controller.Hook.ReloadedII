@@ -45,5 +45,6 @@
   "OptionalDependencies": [],
   "SupportedAppId": [
     "tsonic_win.exe"
-  ]
+  ],
+  "ProjectUrl": "https://github.com/Sewer56/Heroes.Controller.Hook.ReloadedII"
 }

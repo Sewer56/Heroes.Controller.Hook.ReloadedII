@@ -4,21 +4,19 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ApplicationIcon />
-    <OutputType>WinExe</OutputType>
-    <StartupObject />
-    <LangVersion>preview</LangVersion>
-    <RobustILLink>true</RobustILLink>
+    <LangVersion>10.0</LangVersion>
+    <ReloadedILLink>true</ReloadedILLink>
+    <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>$(RELOADEDIIMODS)\sonicheroes.controller.hook.xinput</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <RobustLinkRoots Include="Heroes.Controller.Hook.XInput" />
-    <RobustLinkAssemblies Include="SharpDX" />
-    <RobustLinkAssemblies Include="SharpDX.XInput" />
+    <ReloadedLinkRoots Include="Heroes.Controller.Hook.XInput" />
+    <ReloadedLinkAssemblies Include="SharpDX" />
+    <ReloadedLinkAssemblies Include="SharpDX.XInput" />
   </ItemGroup>
 
-  <Import Project="../Robust.Trimming.targets" />
+  <Import Project="../Reloaded.Trimming.targets" />
 
   <ItemGroup>
     <None Remove="ModConfig.json" />
@@ -35,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.3.0" ExcludeAssets="runtime" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
   </ItemGroup>
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Heroes.Controller.Hook.PostProcess.Misc;
 
 namespace Heroes.Controller.Hook.PostProcess.Structures;

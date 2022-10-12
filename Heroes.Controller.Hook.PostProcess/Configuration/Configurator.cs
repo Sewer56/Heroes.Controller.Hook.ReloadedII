@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Heroes.Controller.Hook.Shared.Configuration;
+﻿using Heroes.Controller.Hook.Shared.Configuration;
 using Reloaded.Mod.Interfaces;
 
 namespace Heroes.Controller.Hook.PostProcess.Configuration;

@@ -12,15 +12,19 @@ on:
 env: 
   PUBLISH_COMMON_PATH: ./Publish/ToUpload/
 
+  PUBLISH_GAMEBANANA_HOOK_PATH: ./Publish/ToUpload/Hook/GameBanana
   PUBLISH_GITHUB_HOOK_PATH: ./Publish/ToUpload/Hook/Generic
   PUBLISH_NUGET_HOOK_PATH: ./Publish/ToUpload/Hook/NuGet
   
+  PUBLISH_GAMEBANANA_CUSTOM_PATH: ./Publish/ToUpload/Custom/GameBanana
   PUBLISH_GITHUB_CUSTOM_PATH: ./Publish/ToUpload/Custom/Generic
   PUBLISH_NUGET_CUSTOM_PATH: ./Publish/ToUpload/Custom/NuGet
   
+  PUBLISH_GAMEBANANA_POSTPROCESS_PATH: ./Publish/ToUpload/PostProcess/GameBanana
   PUBLISH_GITHUB_POSTPROCESS_PATH: ./Publish/ToUpload/PostProcess/Generic
   PUBLISH_NUGET_POSTPROCESS_PATH: ./Publish/ToUpload/PostProcess/NuGet
   
+  PUBLISH_GAMEBANANA_XINPUT_PATH: ./Publish/ToUpload/XInput/GameBanana
   PUBLISH_GITHUB_XINPUT_PATH: ./Publish/ToUpload/XInput/Generic
   PUBLISH_NUGET_XINPUT_PATH: ./Publish/ToUpload/XInput/NuGet
   
@@ -72,7 +76,7 @@ jobs:
         }
         
     - name: Build
-      run: ./PublishAll.ps1
+      run: ./PublishAll.ps1 -ChangelogPath "$env:PUBLISH_CHANGELOG_PATH"
       
     - name: Upload GitHub Release Artifact
       uses: actions/upload-artifact@v2.2.4
@@ -85,6 +89,18 @@ jobs:
           ${{ env.PUBLISH_GITHUB_CUSTOM_PATH }}/*
           ${{ env.PUBLISH_GITHUB_POSTPROCESS_PATH }}/*
           ${{ env.PUBLISH_GITHUB_XINPUT_PATH }}/*
+          
+    - name: Upload GameBanana Release Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        # Artifact name
+        name: GameBanana Release
+        # A file, directory or wildcard pattern that describes what to upload
+        path: |
+          ${{ env.PUBLISH_GAMEBANANA_HOOK_PATH }}/*
+          ${{ env.PUBLISH_GAMEBANANA_CUSTOM_PATH }}/*
+          ${{ env.PUBLISH_GAMEBANANA_POSTPROCESS_PATH }}/*
+          ${{ env.PUBLISH_GAMEBANANA_XINPUT_PATH }}/*
         
     - name: Upload NuGet Release Artifact
       uses: actions/upload-artifact@v2.2.4

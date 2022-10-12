@@ -6,21 +6,19 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ApplicationIcon />
-    <OutputType>WinExe</OutputType>
-    <StartupObject />
-    <LangVersion>preview</LangVersion>
-    <RobustILLink>true</RobustILLink>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>$(RELOADEDIIMODS)\sonicheroes.controller.hook</OutputPath>
+    <ReloadedILLink>true</ReloadedILLink>
   </PropertyGroup>
 
   <ItemGroup>
-    <RobustLinkRoots Include="Heroes.Controller.Hook" />
-    <RobustLinkAssemblies Include="Heroes.SDK" />
-    <RobustLinkAssemblies Include="Reloaded.Memory" />
+    <ReloadedLinkRoots Include="Heroes.Controller.Hook" />
+    <ReloadedLinkAssemblies Include="Heroes.SDK" />
+    <ReloadedLinkAssemblies Include="Reloaded.Memory" />
   </ItemGroup>
 
-  <Import Project="../Robust.Trimming.targets" />
+  <Import Project="../Reloaded.Trimming.targets" />
 
   <ItemGroup>
     <None Remove="ModConfig.json" />
@@ -37,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.3.0" ExcludeAssets="runtime" />
     <PackageReference Include="Reloaded.SharedLib.Hooks" Version="1.9.0" />
   </ItemGroup>
 

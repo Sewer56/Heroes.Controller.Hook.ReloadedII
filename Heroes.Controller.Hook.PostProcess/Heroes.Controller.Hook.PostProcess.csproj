@@ -4,21 +4,19 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <ApplicationIcon />
-    <OutputType>WinExe</OutputType>
-    <StartupObject />
-    <LangVersion>preview</LangVersion>
-    <RobustILLink>true</RobustILLink>
+    <LangVersion>10.0</LangVersion>
+    <ReloadedILLink>true</ReloadedILLink>
+    <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>$(RELOADEDIIMODS)\sonicheroes.controller.hook.postprocess</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <RobustLinkRoots Include="Heroes.Controller.Hook.PostProcess" />
-    <RobustLinkAssemblies Include="Heroes.SDK" />
-    <RobustLinkAssemblies Include="Reloaded.Memory" />
+    <ReloadedLinkRoots Include="Heroes.Controller.Hook.PostProcess" />
+    <ReloadedLinkAssemblies Include="Heroes.SDK" />
+    <ReloadedLinkAssemblies Include="Reloaded.Memory" />
   </ItemGroup>
 
-  <Import Project="../Robust.Trimming.targets" />
+  <Import Project="../Reloaded.Trimming.targets" />
 
   <ItemGroup>
     <None Remove="ModConfig.json" />
@@ -36,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.1.0" />
+    <PackageReference Include="Reloaded.Mod.Interfaces" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
